@@ -72,6 +72,10 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         
         const teamSize = parseInt(teamSizeSelect.value);
+        if (isNaN(teamSize) || teamSize < 3 || teamSize > 4) {
+            alert("Team size must be between 3 and 4 members.");
+            return;
+        }
         const teamName = document.getElementById('team-name').value;
         const members = [];
 
