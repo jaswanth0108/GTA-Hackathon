@@ -1,0 +1,246 @@
+:root {
+    --vc-pink: #ff007f;
+    --vc-cyan: #00ffff;
+    --dark-bg: #0d0d0d;
+    --panel-bg: rgba(20, 20, 20, 0.9);
+    --font-heading: 'Righteous', sans-serif;
+    --font-body: 'Roboto', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--dark-bg);
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+}
+
+/* =========================================
+   SPLIT LAYOUT
+========================================= */
+.split-layout {
+    display: flex;
+    width: 100vw;
+    min-height: 100vh;
+}
+
+/* LEFT SIDE: Image */
+.image-side {
+    flex: 1;
+    background: url('vice_city_model.png') no-repeat center center;
+    background-size: cover;
+    position: relative;
+    border-right: 4px solid var(--vc-cyan);
+    box-shadow: 5px 0 15px rgba(0, 255, 255, 0.3);
+}
+
+.back-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: #fff;
+    text-decoration: none;
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    background: rgba(0,0,0,0.6);
+    padding: 10px 15px;
+    border: 2px solid var(--vc-pink);
+    border-radius: 4px;
+    transition: all 0.3s;
+}
+
+.back-btn:hover {
+    background: var(--vc-pink);
+    color: #fff;
+    box-shadow: 0 0 10px var(--vc-pink);
+}
+
+.overlay-text {
+    position: absolute;
+    bottom: 50px;
+    left: 40px;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.8);
+}
+
+.overlay-text h2 {
+    font-family: var(--font-heading);
+    color: var(--vc-cyan);
+    font-size: 2rem;
+    letter-spacing: 2px;
+}
+
+.overlay-text h1 {
+    font-family: var(--font-heading);
+    color: var(--vc-pink);
+    font-size: 4.5rem;
+    line-height: 1;
+    text-shadow: 0 0 10px var(--vc-pink), 3px 3px 0 #000;
+}
+
+/* RIGHT SIDE: Form */
+.form-side {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    background: radial-gradient(circle at center, #2a102a 0%, #0d0d0d 100%);
+}
+
+.form-container {
+    width: 100%;
+    max-width: 600px;
+    background: var(--panel-bg);
+    border: 2px solid var(--vc-pink);
+    border-radius: 10px;
+    padding: 40px;
+    box-shadow: 0 0 20px rgba(255, 0, 127, 0.4);
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+/* Scrollbar */
+.form-container::-webkit-scrollbar { width: 8px; }
+.form-container::-webkit-scrollbar-track { background: rgba(0,0,0,0.5); }
+.form-container::-webkit-scrollbar-thumb { background: var(--vc-pink); border-radius: 4px; }
+
+.portal-title {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    color: var(--vc-cyan);
+    text-align: center;
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+}
+
+.register-note {
+    text-align: center;
+    color: var(--vc-pink);
+    margin-bottom: 30px;
+    font-style: italic;
+}
+
+/* FORM STYLES */
+.form-group {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px 15px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    color: #fff;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: var(--vc-cyan);
+    box-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
+}
+
+.form-group label {
+    position: absolute;
+    top: 14px;
+    left: 15px;
+    color: #aaa;
+    pointer-events: none;
+    transition: 0.2s ease all;
+}
+
+.form-group input:focus ~ label,
+.form-group input:not(:placeholder-shown) ~ label {
+    top: -10px;
+    left: 10px;
+    font-size: 0.8rem;
+    background: var(--dark-bg);
+    padding: 0 5px;
+    color: var(--vc-cyan);
+}
+
+.form-group select {
+    appearance: none;
+    cursor: pointer;
+}
+.form-group select option {
+    background: #222;
+    color: #fff;
+}
+
+.member-block {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-left: 4px solid var(--vc-cyan);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 25px;
+}
+
+.member-title {
+    font-family: var(--font-heading);
+    color: var(--vc-pink);
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+}
+
+.gta-btn {
+    width: 100%;
+    padding: 15px;
+    background: transparent;
+    border: 2px solid var(--vc-pink);
+    color: #fff;
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+.gta-btn:hover {
+    background: var(--vc-pink);
+    color: #fff;
+    box-shadow: 0 0 15px var(--vc-pink);
+}
+
+#success-message {
+    text-align: center;
+    padding: 40px 20px;
+}
+.hidden { display: none !important; }
+
+/* =========================================
+   RESPONSIVE DESIGN
+========================================= */
+@media (max-width: 900px) {
+    .split-layout {
+        flex-direction: column;
+    }
+    .image-side {
+        min-height: 40vh;
+        border-right: none;
+        border-bottom: 4px solid var(--vc-cyan);
+    }
+    .overlay-text h1 {
+        font-size: 3rem;
+    }
+    .form-side {
+        padding: 20px;
+    }
+}

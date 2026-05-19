@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Grand Tech Alliance VIIT City</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Roboto:wght@300;400;500;700&family=Righteous&family=Pacifico&family=Monoton&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="register.css">
+</head>
+<body>
+    <div class="split-layout">
+        <!-- Left Side: Vice City Model -->
+        <div class="image-side">
+            <a href="index.html" class="back-btn">&larr; BACK TO HUB</a>
+            <div class="overlay-text">
+                <h2>WELCOME TO</h2>
+                <h1 class="neon-brand">GTA VIIT CITY</h1>
+            </div>
+        </div>
+
+        <!-- Right Side: Registration Portal -->
+        <div class="form-side">
+            <div class="form-container">
+                <h2 class="portal-title">REGISTRATION </h2>
+                <p class="register-note">Teams are encouraged to be multidisciplinary. Code meets circuit.</p>
+                
+                <form id="registration-form">
+                    <div class="form-group">
+                        <input type="text" id="team-name" required placeholder=" ">
+                        <label for="team-name">Team Name</label>
+                    </div>
+                    <div class="form-group">
+                        <select id="team-size" required>
+                            <option value="" disabled selected>Select Team Size</option>
+                            <option value="1">1 Member</option>
+                            <option value="2">2 Members</option>
+                            <option value="3">3 Members</option>
+                            <option value="4">4 Members</option>
+                        </select>
+                    </div>
+                    
+                    <div id="dynamic-members">
+                        <!-- Member fields will be injected here via JS -->
+                    </div>
+
+                    <button type="submit" class="gta-btn submit-btn">SUBMIT REGISTRATION</button>
+                </form>
+                <div id="success-message" class="hidden">
+                    <h3>Registration Submitted Successfully.</h3>
+                    <p>Welcome to Grand Tech Alliance VIIT City.</p>
+                    <a href="index.html" class="gta-btn" style="display:inline-block; margin-top: 20px; text-decoration:none;">RETURN TO HUB</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="register.js"></script>
+</body>
+</html>

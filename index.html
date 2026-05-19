@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grand Tech Alliance VIIT City</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Roboto:wght@300;400;500;700&family=Righteous&family=Pacifico&family=Monoton&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Intro Screen -->
+    <div id="intro-screen" class="active">
+        <div class="video-overlay"></div>
+        <video id="intro-video" autoplay muted playsinline>
+            <source src="demo idea1.mp4" type="video/mp4">
+            Your browser does not support HTML5 video.
+        </video>
+        <!-- Title removed as requested -->
+        <button id="skip-btn" class="skip-btn">SKIP <span class="skip-icon">►</span></button>
+    </div>
+
+    <!-- Main Menu Screen -->
+    <div id="main-screen" class="hidden">
+        <div class="background-overlay"></div>
+        
+        <div class="main-container">
+            <!-- Circular Navigation -->
+            <div class="nav-hub">
+                <div class="hub-center">
+                    <h2>Grand Tech Alliance</h2>
+                    <h3 class="neon-title">VIIT City</h3>
+                </div>
+                <button class="nav-btn top" data-target="about-panel">ABOUT</button>
+                <a href="register.html" class="nav-btn right" style="display:flex; justify-content:center; align-items:center; text-decoration:none;">REGISTER</a>
+                <button class="nav-btn bottom" data-target="faq-panel">FAQ</button>
+                <button class="nav-btn left" data-target="support-panel">SUPPORT</button>
+                <div class="hub-ring ring-1"></div>
+                <div class="hub-ring ring-2"></div>
+            </div>
+
+            <!-- Content Panels -->
+            <div id="content-modal" class="content-modal hidden">
+                <div class="modal-backdrop" id="modal-close"></div>
+                <div class="modal-content glass-panel">
+                    <button class="close-btn" id="close-modal">&times;</button>
+                    
+                    <!-- ABOUT PANEL -->
+                    <div id="about-panel" class="panel hidden">
+                        <h2 class="panel-title">MISSION BRIEFING</h2>
+                        <div class="about-content">
+                            <h3>What is Grand Tech Alliance VIIT City?</h3>
+                            <p>A flagship engineering hackathon where first-year minds from every branch converge to build, prototype, and present multidisciplinary solutions.</p>
+                            
+                            <h3>Multidisciplinary by Design</h3>
+                            <p>Teams must mix branches — code meets circuit meets blueprint. Real engineering happens at the intersection.</p>
+                            
+                            <h3>Innovation Beyond Code</h3>
+                            <p>Submit CAD models, circuit diagrams, business flowcharts, or UI prototypes. Every form of engineering thinking counts.</p>
+                        </div>
+                    </div>
+
+                    <!-- REGISTER PANEL REMOVED: Now redirects to register.html -->
+
+                    <!-- FAQ PANEL -->
+                    <div id="faq-panel" class="panel hidden">
+                        <h2 class="panel-title">INTEL (FAQ)</h2>
+                        <div class="accordion">
+                            <div class="accordion-item">
+                                <button class="accordion-header">Can non-coders participate?</button>
+                                <div class="accordion-content">
+                                    <p>Absolutely. HackFusion is multidisciplinary — designers, mechanical, civil and electronics students are equally welcome.</p>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <button class="accordion-header">What can be submitted?</button>
+                                <div class="accordion-content">
+                                    <p>Teams can submit software ideas, UI/UX prototypes, CAD models, circuit designs, hardware concepts, business workflows, research-based concepts, or mixed engineering solutions. The focus is on innovation, feasibility, and teamwork rather than only full coding projects.</p>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <button class="accordion-header">Is coding mandatory?</button>
+                                <div class="accordion-content">
+                                    <p>No. Coding is not mandatory. If your idea is strong and your team can explain the engineering logic, design process, workflow, prototype, or technical model clearly, you can still participate effectively.</p>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <button class="accordion-header">Can students from all branches join?</button>
+                                <div class="accordion-content">
+                                    <p>Yes. Students from all first-year engineering branches can participate. In fact, mixed-branch teams are encouraged because multidisciplinary collaboration is a major part of the hackathon.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SUPPORT PANEL -->
+                    <div id="support-panel" class="panel hidden">
+                        <h2 class="panel-title">CONTACT FIXERS</h2>
+                        <div class="contact-list">
+                            <div class="contact-card">
+                                <div class="contact-name">K. Rohit Kumar <span class="badge">(Head)</span></div>
+                                <div class="contact-number">📞 +91 98453 21098</div>
+                            </div>
+                            <div class="contact-card">
+                                <div class="contact-name">N. V. S. Jaswanth</div>
+                                <div class="contact-number">📞 +91 91234 56789</div>
+                            </div>
+                            <div class="contact-card">
+                                <div class="contact-name">N. Govardhan</div>
+                                <div class="contact-number">📞 +91 98765 43210</div>
+                            </div>
+                            <div class="contact-card">
+                                <div class="contact-name">M. Sai Kumar</div>
+                                <div class="contact-number">📞 +91 99887 76655</div>
+                            </div>
+                            <div class="contact-card">
+                                <div class="contact-name">M. Hriday</div>
+                                <div class="contact-number">📞 +91 90123 45678</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

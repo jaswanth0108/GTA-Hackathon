@@ -1,0 +1,6 @@
+# Ignore large media files that exceed GitHub's 100MB limit
+demo idea1.mp4
+
+# OS generated files
+.DS_Store
+Thumbs.db
