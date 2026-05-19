@@ -98,6 +98,29 @@ body {
     font-size: 0.9rem;
 }
 
+.unmute-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 3;
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    padding: 8px 16px;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border: 2px solid var(--gta-blue);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
+}
+
+.unmute-btn:hover {
+    background: var(--gta-blue);
+    color: #000;
+    box-shadow: 0 0 15px var(--gta-blue);
+}
+
 /* =========================================
    MAIN MENU SCREEN
 ========================================= */
