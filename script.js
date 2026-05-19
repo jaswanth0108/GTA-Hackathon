@@ -2,6 +2,8 @@ document.addEventListener('DOMContentLoaded', () => {
     /* =====================================
        INTRO SCREEN LOGIC
     ===================================== */
+    const startScreen = document.getElementById('start-screen');
+    const startBtn = document.getElementById('start-btn');
     const introScreen = document.getElementById('intro-screen');
     const introVideo = document.getElementById('intro-video');
     const skipBtn = document.getElementById('skip-btn');
@@ -18,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Check if we should skip the intro video (coming back from register page)
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get('skipVideo') === 'true') {
+        if (startScreen) startScreen.classList.add('hidden');
         // Apply immediate skip without transition flash
         introScreen.style.transition = 'none';
         enterMainMenu();
@@ -25,6 +28,19 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             introScreen.style.transition = '';
         }, 100);
+    }
+
+    // Start Mission Logic
+    if (startBtn && startScreen) {
+        startBtn.addEventListener('click', () => {
+            startScreen.classList.add('hidden');
+            introScreen.classList.remove('hidden');
+            if (introVideo) {
+                introVideo.play().catch(e => {
+                    console.log("Autoplay prevented:", e);
+                });
+            }
+        });
     }
 
     if (skipBtn) {
