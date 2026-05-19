@@ -15,6 +15,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    // Check if we should skip the intro video (coming back from register page)
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('skipVideo') === 'true') {
+        // Apply immediate skip without transition flash
+        introScreen.style.transition = 'none';
+        enterMainMenu();
+        // Restore transition for subsequent interactions
+        setTimeout(() => {
+            introScreen.style.transition = '';
+        }, 100);
+    }
+
     if (skipBtn) {
         skipBtn.addEventListener('click', enterMainMenu);
     }
