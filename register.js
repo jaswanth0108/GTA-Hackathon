@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // REPLACE THIS URL WITH YOUR DEPLOYED GOOGLE APPS SCRIPT WEB APP URL
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbybJD-lM7SqvNU9TSnFkjF7F1z-37GHcdRizq3Pwpcs-FePDhH8SGednS2yL9xAH_xCCQ/exec';
+    const SCRIPT_URL = 'https://script.google.com/macros/library/d/1eTfB3vm_cj9R27wokw26jiRzxRxi6BqvBfuAl3aArf7_o4dGclP8YhuA/1';
 
     teamSizeSelect.addEventListener('change', (e) => {
         const size = parseInt(e.target.value);
@@ -112,8 +112,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         fetch(SCRIPT_URL, {
             method: 'POST',
+            mode: 'no-cors', // Avoid CORS preflight issues with Google Apps Script
             headers: {
-                'Content-Type': 'text/plain' // Bypasses preflight OPTIONS check while preserving raw JSON payload
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(payload)
         })
