@@ -112,9 +112,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         fetch(SCRIPT_URL, {
             method: 'POST',
-            mode: 'no-cors', // Avoid CORS preflight issues with Google Apps Script
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'text/plain' // Bypasses preflight OPTIONS check while preserving raw JSON payload
             },
             body: JSON.stringify(payload)
         })
