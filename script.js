@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const introScreen = document.getElementById('intro-screen');
     const introVideo = document.getElementById('intro-video');
     const skipBtn = document.getElementById('skip-btn');
-    const unmuteBtn = document.getElementById('unmute-btn');
     const mainScreen = document.getElementById('main-screen');
 
     const enterMainMenu = () => {
@@ -30,13 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (skipBtn) {
         skipBtn.addEventListener('click', enterMainMenu);
-    }
-    
-    if (unmuteBtn && introVideo) {
-        unmuteBtn.addEventListener('click', () => {
-            introVideo.muted = false;
-            unmuteBtn.style.display = 'none'; // Hide after unmuting
-        });
     }
     
     if (introVideo) {
