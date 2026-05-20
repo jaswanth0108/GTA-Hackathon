@@ -40,12 +40,13 @@ body {
     width: 100vw;
     height: 100vh;
     z-index: 150;
-    background: #000 url('start_bg.jpg') no-repeat left center; /* Align image left */
-    background-size: contain; /* Don't stretch image out of proportion */
+    background: #000 url('start_bg.jpg') no-repeat center center; /* Centered image */
+    background-size: contain; 
     display: flex;
-    justify-content: flex-end; /* Button on the right */
-    align-items: center;
-    padding-right: 15vw;
+    flex-direction: column;
+    justify-content: flex-end; /* Align button to bottom */
+    align-items: center; /* Align button to center */
+    padding-bottom: 12vh; /* Space from the bottom */
     transition: opacity 0.5s ease, visibility 0.5s;
 }
 
@@ -57,23 +58,22 @@ body {
 
 .start-mission-btn {
     font-family: 'Pricedown', 'Righteous', sans-serif;
-    font-size: 4.5rem;
-    padding: 10px 20px;
+    font-size: 2.5rem; /* Smaller button */
+    padding: 5px 20px;
     background: transparent;
-    color: #f7a8b8; /* Classic VC pale pink */
+    color: #ff66cc; /* Hot pink from the screenshot */
     border: none;
-    -webkit-text-stroke: 2px #000;
-    text-shadow: 4px 4px 0 #000;
+    -webkit-text-stroke: 1px #000;
+    text-shadow: 2px 2px 0 #000, 4px 4px 0px rgba(0,0,0,0.6); /* Solid drop shadow */
     cursor: pointer;
-    text-transform: capitalize;
-    transition: all 0.2s ease;
+    text-transform: lowercase; /* Menu items in screenshot are lowercase */
+    transition: all 0.1s ease;
 }
 
 .start-mission-btn:hover {
-    background: transparent;
-    color: #ffc107; /* VC Gold selection */
+    background: #2a8b4f; /* Green highlight block from the screenshot */
+    color: #ff66cc;
     transform: scale(1.05);
-    box-shadow: none;
 }
 
 /* =========================================
