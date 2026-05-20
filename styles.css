@@ -129,6 +129,34 @@ body {
     }
 }
 
+/* Portrait Popup Animation and Display Logic */
+.rotate-portrait-inner {
+    animation: rotatePhonePortrait 2s infinite ease-in-out;
+}
+.rotate-icon-landscape {
+    transform: rotate(90deg);
+}
+
+@keyframes rotatePhonePortrait {
+    0% { transform: rotate(0deg); }
+    50% { transform: rotate(-90deg); }
+    100% { transform: rotate(0deg); }
+}
+
+@media screen and (max-height: 600px) and (orientation: landscape) {
+    body:not(.require-landscape) #rotate-portrait-popup {
+        display: flex;
+        visibility: visible;
+        opacity: 1;
+        pointer-events: auto;
+    }
+}
+@media screen and (orientation: portrait), screen and (min-height: 601px) {
+    #rotate-portrait-popup {
+        display: none !important;
+    }
+}
+
 /* =========================================
    MAP LOADING OVERLAY
 ========================================= */
