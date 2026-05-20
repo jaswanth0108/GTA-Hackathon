@@ -40,19 +40,14 @@ body {
     width: 100vw;
     height: 100vh;
     z-index: 150;
-    background: #000; /* Solid black */
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* Center everything vertically */
-    align-items: center; /* Center everything horizontally */
+    background: #000;
     transition: opacity 0.5s ease, visibility 0.5s;
 }
 
 .start-image {
-    max-width: 90vw;
-    max-height: 75vh; /* Leaves room for button below */
-    object-fit: contain;
-    margin-bottom: 20px; /* Space between image and button */
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover; /* Fit exactly to the frame */
 }
 
 #start-screen.hidden {
@@ -62,23 +57,27 @@ body {
 }
 
 .start-mission-btn {
-    font-family: 'Pricedown', 'Righteous', sans-serif;
-    font-size: 2rem; /* Even smaller button */
-    padding: 5px 15px;
-    background: transparent;
-    color: #00ffff; /* Neon Cyan from Vice City */
-    border: none;
-    -webkit-text-stroke: 1px #000;
-    text-shadow: 2px 2px 0 #000, 4px 4px 0px rgba(0,0,0,0.6); /* Solid drop shadow */
+    position: absolute;
+    bottom: 5vh; /* Aligned to the center bottom of the frame */
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Righteous', sans-serif;
+    font-size: 1.8rem; /* Small button */
+    padding: 10px 25px;
+    background: rgba(0, 0, 0, 0.7); /* Button box */
+    color: #ff007f; /* Vice City pink text */
+    border: 2px solid #ff007f; /* Pink border */
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(255, 0, 127, 0.5);
     cursor: pointer;
-    text-transform: lowercase; /* Menu items in screenshot are lowercase */
-    transition: all 0.1s ease;
+    text-transform: uppercase;
+    transition: all 0.2s ease;
 }
 
 .start-mission-btn:hover {
-    background: #ff007f; /* Pink highlight block */
-    color: #fff; /* White text on hover */
-    transform: scale(1.05);
+    background: #ff007f;
+    color: #fff;
+    transform: translateX(-50%) scale(1.05);
 }
 
 /* =========================================
