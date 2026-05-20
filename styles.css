@@ -29,49 +29,132 @@ body {
 }
 
 /* =========================================
-   START SCREEN
+   ROTATE POPUP (Mobile Portrait)
 ========================================= */
-#start-screen {
+.rotate-popup {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 150;
-    background: #000 url('bg.png') no-repeat center center;
-    background-size: cover;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: var(--dark-bg);
+    z-index: 9999;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: opacity 0.5s ease, visibility 0.5s;
+    flex-direction: column;
+    text-align: center;
+    transition: opacity 0.5s ease;
+}
+.rotate-popup.hidden {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+}
+.rotate-popup-inner {
+    animation: rotatePhone 2s infinite ease-in-out;
+}
+.rotate-icon { font-size: 4rem; margin-bottom: 10px; }
+.rotate-arrow { font-size: 2rem; color: var(--gta-orange); margin-bottom: 20px; }
+.rotate-title { font-family: var(--font-heading); color: var(--gta-blue); font-size: 2rem; margin-bottom: 10px; text-transform: uppercase; }
+.rotate-subtitle { font-family: var(--font-body); color: #ccc; font-size: 1.2rem; }
+
+@keyframes rotatePhone {
+    0% { transform: rotate(0deg); }
+    50% { transform: rotate(90deg); }
+    100% { transform: rotate(0deg); }
 }
 
-#start-screen::before {
+@media screen and (max-width: 768px) and (orientation: portrait) {
+    #rotate-popup {
+        display: flex;
+        visibility: visible;
+        opacity: 1;
+        pointer-events: auto;
+    }
+}
+@media screen and (min-width: 769px), screen and (orientation: landscape) {
+    #rotate-popup {
+        display: none !important;
+    }
+}
+
+/* =========================================
+   MAP LOADING OVERLAY
+========================================= */
+.map-loading {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: #000 url('bg.png') no-repeat center center;
+    background-size: cover;
+    z-index: 9000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease;
+}
+.map-loading::before {
     content: '';
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    z-index: -1;
+    background: rgba(0, 0, 0, 0.85);
 }
-
-#start-screen.hidden {
+.map-loading.hidden {
     opacity: 0;
-    visibility: hidden;
     pointer-events: none;
+    visibility: hidden;
 }
-
-.start-mission-btn {
-    font-size: 2rem;
-    padding: 20px 40px;
-    max-width: 400px;
-    box-shadow: 0 0 20px var(--gta-orange);
-    animation: pulse 2s infinite;
+.map-loading-inner {
+    position: relative;
+    z-index: 1;
+    text-align: center;
 }
-
-@keyframes pulse {
-    0% { transform: scale(1); box-shadow: 0 0 20px var(--gta-orange); }
-    50% { transform: scale(1.05); box-shadow: 0 0 40px var(--gta-orange); }
-    100% { transform: scale(1); box-shadow: 0 0 20px var(--gta-orange); }
+.map-radar {
+    width: 150px; height: 150px;
+    border-radius: 50%;
+    border: 3px solid var(--gta-blue);
+    margin: 0 auto 30px;
+    background: rgba(0, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+}
+.radar-sweep {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 50%; height: 50%;
+    background: linear-gradient(45deg, rgba(0,255,255,0.8) 0%, transparent 50%);
+    transform-origin: 0% 0%;
+    animation: sweep 2s infinite linear;
+}
+.radar-dot {
+    position: absolute;
+    width: 8px; height: 8px;
+    background: var(--gta-orange);
+    border-radius: 50%;
+    top: 40%; left: 60%;
+    box-shadow: 0 0 10px var(--gta-orange);
+    animation: blink 1s infinite;
+}
+@keyframes sweep {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+.map-loading-text {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    color: var(--gta-gold);
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+.map-loading-sub {
+    font-family: var(--font-body);
+    font-size: 1.2rem;
+    color: #fff;
+    opacity: 0.8;
 }
 
 /* =========================================

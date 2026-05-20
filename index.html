@@ -12,15 +12,32 @@
 </head>
 <body>
 
-    <!-- Start Screen -->
-    <div id="start-screen" class="active">
-        <button id="start-btn" class="gta-btn start-mission-btn">CLICK TO ENTER</button>
+    <!-- Rotate Screen Popup (Mobile Portrait Only) -->
+    <div id="rotate-popup" class="rotate-popup hidden">
+        <div class="rotate-popup-inner">
+            <div class="rotate-icon">📱</div>
+            <div class="rotate-arrow">↻</div>
+            <h2 class="rotate-title">ROTATE YOUR DEVICE</h2>
+            <p class="rotate-subtitle">For the best Vice City experience,<br>please rotate your screen to landscape mode.</p>
+        </div>
+    </div>
+
+    <!-- GTA Map Loading Overlay -->
+    <div id="map-loading" class="map-loading hidden">
+        <div class="map-loading-inner">
+            <div class="map-radar">
+                <div class="radar-sweep"></div>
+                <div class="radar-dot"></div>
+            </div>
+            <p class="map-loading-text">MAP IS LOADING<span class="dots">...</span></p>
+            <p class="map-loading-sub">Entering Vice City registration zone</p>
+        </div>
     </div>
 
     <!-- Intro Screen -->
-    <div id="intro-screen" class="hidden">
+    <div id="intro-screen" class="active">
         <div class="video-overlay"></div>
-        <video id="intro-video" playsinline>
+        <video id="intro-video" autoplay playsinline>
             <source src="https://github.com/jaswanth0108/GTA-Hackathon/releases/download/v1.0-demo/demo.idea1.mp4" type="video/mp4">
             Your browser does not support HTML5 video.
         </video>
@@ -40,7 +57,7 @@
                     <h3 class="neon-title">VIIT City</h3>
                 </div>
                 <button class="nav-btn top" data-target="about-panel">ABOUT</button>
-                <a href="register.html" class="nav-btn right" style="display:flex; justify-content:center; align-items:center; text-decoration:none;">REGISTER</a>
+                <a href="register.html" id="register-link" class="nav-btn right" style="display:flex; justify-content:center; align-items:center; text-decoration:none;">REGISTER</a>
                 <button class="nav-btn bottom" data-target="faq-panel">FAQ</button>
                 <button class="nav-btn left" data-target="support-panel">SUPPORT</button>
                 <div class="hub-ring ring-1"></div>
