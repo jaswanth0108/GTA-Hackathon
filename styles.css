@@ -40,14 +40,19 @@ body {
     width: 100vw;
     height: 100vh;
     z-index: 150;
-    background: #000 url('start_bg.jpg') no-repeat center center; /* Centered image */
-    background-size: contain; 
+    background: #000; /* Solid black */
     display: flex;
     flex-direction: column;
-    justify-content: flex-end; /* Align button to bottom */
-    align-items: center; /* Align button to center */
-    padding-bottom: 12vh; /* Space from the bottom */
+    justify-content: center; /* Center everything vertically */
+    align-items: center; /* Center everything horizontally */
     transition: opacity 0.5s ease, visibility 0.5s;
+}
+
+.start-image {
+    max-width: 90vw;
+    max-height: 75vh; /* Leaves room for button below */
+    object-fit: contain;
+    margin-bottom: 20px; /* Space between image and button */
 }
 
 #start-screen.hidden {
@@ -58,10 +63,10 @@ body {
 
 .start-mission-btn {
     font-family: 'Pricedown', 'Righteous', sans-serif;
-    font-size: 2.5rem; /* Smaller button */
-    padding: 5px 20px;
+    font-size: 2rem; /* Even smaller button */
+    padding: 5px 15px;
     background: transparent;
-    color: #ff66cc; /* Hot pink from the screenshot */
+    color: #00ffff; /* Neon Cyan from Vice City */
     border: none;
     -webkit-text-stroke: 1px #000;
     text-shadow: 2px 2px 0 #000, 4px 4px 0px rgba(0,0,0,0.6); /* Solid drop shadow */
@@ -71,8 +76,8 @@ body {
 }
 
 .start-mission-btn:hover {
-    background: #2a8b4f; /* Green highlight block from the screenshot */
-    color: #ff66cc;
+    background: #ff007f; /* Pink highlight block */
+    color: #fff; /* White text on hover */
     transform: scale(1.05);
 }
 
