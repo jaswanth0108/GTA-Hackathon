@@ -116,7 +116,7 @@ body {
 }
 
 @media screen and (max-width: 768px) and (orientation: portrait) {
-    #rotate-popup {
+    body.require-landscape #rotate-popup {
         display: flex;
         visibility: visible;
         opacity: 1;
@@ -124,7 +124,7 @@ body {
     }
 }
 @media screen and (min-width: 769px), screen and (orientation: landscape) {
-    #rotate-popup {
+    body.require-landscape #rotate-popup {
         display: none !important;
     }
 }

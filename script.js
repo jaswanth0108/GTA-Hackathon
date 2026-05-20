@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const enterMainMenu = () => {
         introScreen.classList.add('hidden');
         mainScreen.classList.remove('hidden');
+        document.body.classList.remove('require-landscape'); // Allow portrait mode in main menu
         if (introVideo) {
             introVideo.pause();
         }
