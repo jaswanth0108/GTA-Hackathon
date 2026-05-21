@@ -428,198 +428,256 @@ body {
     z-index: 1;
 }
 
+
+
 /* =========================================
-   CIRCULAR HUB
+   CIRCULAR HUB - COMPLETE REDESIGN
 ========================================= */
 .nav-hub {
     position: relative;
-    width: 480px;
-    height: 480px;
+    width: 780px;
+    height: 640px;
     display: flex;
     justify-content: center;
     align-items: center;
     animation: scale-up 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-@keyframes scale-up {
-    0% { transform: scale(0.5); opacity: 0; }
-    100% { transform: scale(1); opacity: 1; }
-}
-
-/* Center Circle */
+/* ---- CENTER CIRCLE (rings + text live here) ---- */
 .hub-center {
     position: absolute;
-    z-index: 2;
-    width: 220px;
-    height: 220px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 260px;
+    height: 260px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(30,10,60,0.92) 0%, rgba(10,5,30,0.95) 100%);
+    background: radial-gradient(circle, rgba(60,10,100,0.75) 0%, rgba(12,4,35,0.9) 70%);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
+    z-index: 3;
 }
 
+/* ---- RINGS ---- */
 .hub-ring {
     position: absolute;
     border-radius: 50%;
     pointer-events: none;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
+/* Outer pink ring */
 .ring-1 {
-    width: 220px;
-    height: 220px;
-    border: 4px solid #ff00cc;
-    box-shadow: 0 0 18px #ff00cc, 0 0 40px rgba(255,0,204,0.5), inset 0 0 18px rgba(255,0,204,0.15);
-    animation: spin 30s linear infinite;
+    width: 300px;
+    height: 300px;
+    border: 5px solid #ff0099;
+    box-shadow:
+        0 0 12px #ff0099,
+        0 0 30px rgba(255, 0, 153, 0.6),
+        0 0 60px rgba(255, 0, 153, 0.3),
+        inset 0 0 15px rgba(255, 0, 153, 0.2);
+    z-index: 1;
 }
 
+/* Inner cyan ring */
 .ring-2 {
-    width: 250px;
-    height: 250px;
-    border: 3px solid #00e5ff;
-    box-shadow: 0 0 18px #00e5ff, 0 0 40px rgba(0,229,255,0.4), inset 0 0 18px rgba(0,229,255,0.1);
-    animation: spin-reverse 20s linear infinite;
+    width: 238px;
+    height: 238px;
+    border: 4px solid #00ccff;
+    box-shadow:
+        0 0 10px #00ccff,
+        0 0 25px rgba(0, 204, 255, 0.6),
+        0 0 50px rgba(0, 204, 255, 0.3),
+        inset 0 0 12px rgba(0, 204, 255, 0.15);
+    z-index: 1;
 }
 
-@keyframes spin { 100% { transform: rotate(360deg); } }
-@keyframes spin-reverse { 100% { transform: rotate(-360deg); } }
-
-/* Hub center text content */
+/* ---- CENTER TEXT ---- */
 .hub-inner-text {
     position: relative;
-    z-index: 3;
+    z-index: 5;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2px;
+    gap: 1px;
+    padding: 0 10px;
 }
 
 .hub-title-big {
     font-family: 'Audiowide', 'Righteous', sans-serif;
-    font-size: 2.8rem;
+    font-size: 3rem;
     font-weight: 900;
-    background: linear-gradient(180deg, #00e5ff 0%, #7b3fff 100%);
+    background: linear-gradient(160deg, #00e5ff 0%, #aa44ff 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-shadow: none;
-    letter-spacing: 4px;
+    letter-spacing: 5px;
     line-height: 1;
-    filter: drop-shadow(0 0 10px #00e5ff);
+    filter: drop-shadow(0 0 8px rgba(0, 229, 255, 0.9));
 }
 
 .hub-title-mid {
     font-family: 'Roboto', sans-serif;
-    font-size: 0.75rem;
-    color: rgba(255,255,255,0.85);
-    letter-spacing: 4px;
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.9);
+    letter-spacing: 5px;
     text-transform: uppercase;
+    margin-top: 2px;
 }
 
 .hub-title-small {
     font-family: 'Pacifico', cursive;
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: #ff00cc;
-    text-shadow: 0 0 10px #ff00cc, 0 0 25px rgba(255,0,204,0.6);
-    letter-spacing: 0.5px;
+    text-shadow: 0 0 8px #ff00cc, 0 0 20px rgba(255, 0, 204, 0.7);
+    letter-spacing: 1px;
+    margin-top: 2px;
 }
 
 /* =========================================
-   HUB CONNECTORS & PILL BUTTONS
+   CONNECTORS & BUTTONS — EXACT REPLICA
+   Ring outer radius = 150px (300px / 2)
 ========================================= */
+
+/* All connectors are absolute children of .nav-hub */
 .hub-connector {
     position: absolute;
     display: flex;
     align-items: center;
-    justify-content: center;
     z-index: 5;
 }
 
-/* Connector vertical lines */
+/* TOP — button above ring, line drops down to ring */
 .connector-top {
-    flex-direction: column;
-    top: 0;
+    bottom: calc(50% + 150px); /* places bottom edge at ring top */
     left: 50%;
     transform: translateX(-50%);
-}
-.connector-bottom {
-    flex-direction: column-reverse;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-}
-.connector-left {
-    flex-direction: row;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-}
-.connector-right {
-    flex-direction: row-reverse;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
+    flex-direction: column;    /* button on top, line below */
+    justify-content: flex-end;
+    align-items: center;
 }
 
-.connector-line {
-    background: linear-gradient(180deg, transparent, rgba(0, 229, 255, 0.6), transparent);
-    flex-shrink: 0;
+/* BOTTOM — button below ring, line rises up to ring */
+.connector-bottom {
+    top: calc(50% + 150px);  /* places top edge at ring bottom */
+    left: 50%;
+    transform: translateX(-50%);
+    flex-direction: column;    /* line on top, button below */
+    align-items: center;
 }
+
+/* LEFT — button left of ring, line goes right to ring */
+.connector-left {
+    right: calc(50% + 150px);  /* places right edge at ring left */
+    top: 50%;
+    transform: translateY(-50%);
+    flex-direction: row;       /* button left, line right */
+    align-items: center;
+}
+
+/* RIGHT — button right of ring, line goes left to ring */
+.connector-right {
+    left: calc(50% + 150px);   /* places left edge at ring right */
+    top: 50%;
+    transform: translateY(-50%);
+    flex-direction: row-reverse; /* line left, button right */
+    align-items: center;
+}
+
+/* ---- CONNECTOR LINES ---- */
+.connector-line {
+    flex-shrink: 0;
+    position: relative;
+}
+
+/* Vertical lines (top/bottom) */
 .connector-top .connector-line,
 .connector-bottom .connector-line {
     width: 2px;
-    height: 55px;
-}
-.connector-left .connector-line,
-.connector-right .connector-line {
-    width: 55px;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, rgba(0, 229, 255, 0.6), transparent);
+    height: 52px;
+    background: linear-gradient(to bottom, rgba(0,220,255,0.1), rgba(0,220,255,0.9), rgba(0,220,255,0.1));
 }
 
-/* Pill Navigation Buttons */
+/* Horizontal lines (left/right) */
+.connector-left .connector-line,
+.connector-right .connector-line {
+    height: 2px;
+    width: 52px;
+    background: linear-gradient(to right, rgba(0,220,255,0.1), rgba(0,220,255,0.9), rgba(0,220,255,0.1));
+}
+
+/* Circuit tick marks on vertical connectors (top/bottom) */
+.connector-top .connector-line::before,
+.connector-bottom .connector-line::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 16px;
+    height: 2px;
+    background: rgba(0, 220, 255, 0.8);
+    box-shadow: 0 0 5px rgba(0, 220, 255, 0.6);
+}
+
+/* Circuit tick marks on horizontal connectors (left/right) */
+.connector-left .connector-line::before,
+.connector-right .connector-line::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 2px;
+    height: 16px;
+    background: rgba(0, 220, 255, 0.8);
+    box-shadow: 0 0 5px rgba(0, 220, 255, 0.6);
+}
+
+/* ---- PILL BUTTONS ---- */
 .nav-btn-pill {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 10px;
     font-family: 'Righteous', sans-serif;
-    font-size: 1rem;
+    font-size: 1.05rem;
     font-weight: normal;
     color: #fff;
     text-decoration: none;
     text-transform: uppercase;
     letter-spacing: 2px;
     cursor: pointer;
-    padding: 10px 22px;
-    background: rgba(10, 5, 35, 0.82);
-    border-radius: 8px;
-    border: 1.5px solid rgba(0, 229, 255, 0.6);
-    box-shadow: 0 0 10px rgba(0, 229, 255, 0.25), inset 0 0 10px rgba(0, 229, 255, 0.05);
-    backdrop-filter: blur(8px);
-    transition: all 0.3s ease;
+    padding: 12px 24px;
+    background: rgba(8, 4, 30, 0.88);
+    border-radius: 10px;
+    border: 1.5px solid rgba(0, 220, 255, 0.65);
+    box-shadow:
+        0 0 12px rgba(0, 220, 255, 0.2),
+        inset 0 0 10px rgba(0, 220, 255, 0.06);
+    backdrop-filter: blur(10px);
+    transition: all 0.25s ease;
     white-space: nowrap;
-}
-
-.nav-btn-pill.top, .nav-btn-pill.bottom {
-    min-width: 160px;
-}
-.nav-btn-pill.left, .nav-btn-pill.right {
-    min-width: 160px;
+    min-width: 185px;
 }
 
 .nav-btn-pill:hover {
-    background: rgba(255, 0, 204, 0.2);
+    background: rgba(255, 0, 204, 0.18);
     border-color: #ff00cc;
-    color: #fff;
-    box-shadow: 0 0 20px rgba(255, 0, 204, 0.5), inset 0 0 12px rgba(255, 0, 204, 0.1);
-    transform: scale(1.05);
+    box-shadow:
+        0 0 22px rgba(255, 0, 204, 0.55),
+        inset 0 0 14px rgba(255, 0, 204, 0.1);
+    transform: scale(1.06);
 }
 
 .pill-icon {
     font-size: 1rem;
+    opacity: 0.85;
 }
 
 /* =========================================
@@ -632,18 +690,26 @@ body {
     justify-content: center;
     gap: 30px;
     padding: 10px 20px;
-    background: rgba(8, 5, 25, 0.75);
-    border-top: 1px solid rgba(255, 0, 200, 0.2);
+    background: rgba(8, 5, 25, 0.8);
+    border-top: 1px solid rgba(255, 0, 200, 0.25);
     flex-shrink: 0;
 }
 
 .vc-footer a {
     font-family: 'Roboto', sans-serif;
     font-size: 0.85rem;
-    color: rgba(255, 0, 204, 0.7);
+    color: rgba(255, 0, 204, 0.75);
     text-decoration: none;
     letter-spacing: 0.5px;
     transition: color 0.2s;
+}
+
+.vc-footer a:first-child {
+    color: #ff00cc;
+}
+
+.vc-footer a:not(:first-child) {
+    color: rgba(255, 255, 255, 0.65);
 }
 
 .vc-footer a:hover {
