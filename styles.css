@@ -512,33 +512,39 @@ body {
 
 .hub-title-big {
     font-family: 'Audiowide', 'Righteous', sans-serif;
-    font-size: 3rem;
+    font-size: 2.2rem;
     font-weight: 900;
-    background: linear-gradient(160deg, #00e5ff 0%, #aa44ff 100%);
+    font-style: italic;
+    background: linear-gradient(180deg, #e6f0ff 0%, #6890cc 45%, #ff00ff 55%, #00ffff 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    letter-spacing: 5px;
-    line-height: 1;
-    filter: drop-shadow(0 0 8px rgba(0, 229, 255, 0.9));
+    letter-spacing: 2px;
+    line-height: 1.1;
+    filter: drop-shadow(0 0 10px rgba(255, 0, 255, 0.8));
+    margin-bottom: 5px;
 }
 
 .hub-title-mid {
     font-family: 'Roboto', sans-serif;
-    font-size: 0.65rem;
-    color: rgba(255, 255, 255, 0.9);
-    letter-spacing: 5px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #00ffff;
+    letter-spacing: 6px;
     text-transform: uppercase;
+    text-shadow: 0 0 10px #00ffff, 0 0 20px rgba(0, 255, 255, 0.7);
     margin-top: 2px;
 }
 
 .hub-title-small {
-    font-family: 'Pacifico', cursive;
-    font-size: 1rem;
-    color: #ff00cc;
-    text-shadow: 0 0 8px #ff00cc, 0 0 20px rgba(255, 0, 204, 0.7);
-    letter-spacing: 1px;
-    margin-top: 2px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #ff00ff;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    text-shadow: 0 0 10px #ff00ff, 0 0 20px rgba(255, 0, 255, 0.7);
+    margin-top: 5px;
 }
 
 /* =========================================
@@ -549,96 +555,166 @@ body {
 /* All connectors are absolute children of .nav-hub */
 .hub-connector {
     position: absolute;
+    top: 50%;
+    left: 50%;
     display: flex;
     align-items: center;
     z-index: 5;
+    transform-origin: 0 50%;
 }
 
-/* TOP — button above ring, line drops down to ring */
-.connector-top {
-    bottom: calc(50% + 155px);
-    left: 50%;
-    transform: translateX(-50%);
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
+/* Diagonal Spoke Connectors */
+.connector-top-left {
+    transform: translateY(-50%) rotate(-135deg);
 }
-
-/* BOTTOM — button below ring, line rises up to ring */
-.connector-bottom {
-    top: calc(50% + 155px);
-    left: 50%;
-    transform: translateX(-50%);
-    flex-direction: column;
-    align-items: center;
+.connector-top-right {
+    transform: translateY(-50%) rotate(-45deg);
 }
-
-/* LEFT — button left of ring, line goes right to ring */
-.connector-left {
-    right: calc(50% + 155px);
-    top: 50%;
-    transform: translateY(-50%);
-    flex-direction: row;
-    align-items: center;
+.connector-bottom-left {
+    transform: translateY(-50%) rotate(135deg);
 }
-
-/* RIGHT — button right of ring, line goes left to ring */
-.connector-right {
-    left: calc(50% + 155px);
-    top: 50%;
-    transform: translateY(-50%);
-    flex-direction: row-reverse;
-    align-items: center;
+.connector-bottom-right {
+    transform: translateY(-50%) rotate(45deg);
 }
 
 /* ---- CONNECTOR LINES ---- */
 .connector-line {
-    flex-shrink: 0;
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(0,255,255,0.2), rgba(0,255,255,1), rgba(0,255,255,0.2));
+    margin-left: 155px; /* Offset to start outside the 310px ring */
     position: relative;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+    flex-shrink: 0;
 }
 
-/* Vertical lines (top/bottom) */
-.connector-top .connector-line,
-.connector-bottom .connector-line {
-    width: 2px;
-    height: 52px;
-    background: linear-gradient(to bottom, rgba(0,220,255,0.1), rgba(0,220,255,0.9), rgba(0,220,255,0.1));
-}
-
-/* Horizontal lines (left/right) */
-.connector-left .connector-line,
-.connector-right .connector-line {
-    height: 2px;
-    width: 52px;
-    background: linear-gradient(to right, rgba(0,220,255,0.1), rgba(0,220,255,0.9), rgba(0,220,255,0.1));
-}
-
-/* Circuit tick marks on vertical connectors (top/bottom) */
-.connector-top .connector-line::before,
-.connector-bottom .connector-line::before {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 16px;
-    height: 2px;
-    background: rgba(0, 220, 255, 0.8);
-    box-shadow: 0 0 5px rgba(0, 220, 255, 0.6);
-}
-
-/* Circuit tick marks on horizontal connectors (left/right) */
-.connector-left .connector-line::before,
-.connector-right .connector-line::before {
+/* Circuit tick marks on connector lines */
+.connector-line::after {
     content: '';
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 2px;
-    height: 16px;
-    background: rgba(0, 220, 255, 0.8);
-    box-shadow: 0 0 5px rgba(0, 220, 255, 0.6);
+    width: 4px;
+    height: 12px;
+    background: #00ffff;
+    box-shadow: 0 0 5px #00ffff;
+}
+
+/* ---- PENTAGON NODES ---- */
+.nav-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: 'Righteous', sans-serif;
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    cursor: pointer;
+    width: 220px;
+    height: 90px;
+    background: rgba(10, 5, 25, 0.85);
+    backdrop-filter: blur(8px);
+    transition: all 0.3s ease;
+    border: none;
+    outline: none;
+    position: relative;
+    margin-left: 5px;
+}
+
+/* Node specific inverse rotation */
+.connector-top-left .nav-node {
+    transform: rotate(135deg);
+    clip-path: polygon(15% 0, 100% 0, 100% 100%, 15% 100%, 0 50%);
+    border-left: 3px solid #6600ff;
+    border-right: 3px solid #0066ff;
+    box-shadow: inset 0 0 15px rgba(102, 0, 255, 0.5), inset 0 0 15px rgba(0, 102, 255, 0.5);
+}
+.connector-top-left:hover .nav-node {
+    transform: rotate(135deg) scale(1.05);
+    background: rgba(102, 0, 255, 0.2);
+}
+
+.connector-top-right .nav-node {
+    transform: rotate(45deg);
+    clip-path: polygon(0 0, 85% 0, 100% 50%, 85% 100%, 0 100%);
+    border-left: 3px solid #00ccff;
+    border-right: 3px solid #0066ff;
+    box-shadow: inset 0 0 15px rgba(0, 204, 255, 0.5);
+}
+.connector-top-right:hover .nav-node {
+    transform: rotate(45deg) scale(1.05);
+    background: rgba(0, 204, 255, 0.2);
+}
+
+.connector-bottom-left .nav-node {
+    transform: rotate(-135deg);
+    clip-path: polygon(15% 0, 100% 0, 100% 100%, 15% 100%, 0 50%);
+    border-left: 3px solid #cc00ff;
+    border-right: 3px solid #6600ff;
+    box-shadow: inset 0 0 15px rgba(204, 0, 255, 0.5);
+}
+.connector-bottom-left:hover .nav-node {
+    transform: rotate(-135deg) scale(1.05);
+    background: rgba(204, 0, 255, 0.2);
+}
+
+.connector-bottom-right .nav-node {
+    transform: rotate(-45deg);
+    clip-path: polygon(0 0, 85% 0, 100% 50%, 85% 100%, 0 100%);
+    border-left: 3px solid #ff9900;
+    border-right: 3px solid #ff0033;
+    box-shadow: inset 0 0 15px rgba(255, 153, 0, 0.5);
+}
+.connector-bottom-right:hover .nav-node {
+    transform: rotate(-45deg) scale(1.05);
+    background: rgba(255, 153, 0, 0.2);
+}
+
+/* Add custom colored borders since clip-path cuts off CSS borders sometimes */
+/* In CSS, actual borders on clip-path elements are tricky. We use internal pseudo-elements. */
+.nav-node::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: -1;
+}
+.connector-top-left .nav-node::before { background: linear-gradient(90deg, #6600ff, #0066ff); }
+.connector-top-right .nav-node::before { background: linear-gradient(90deg, #0066ff, #00ccff); }
+.connector-bottom-left .nav-node::before { background: linear-gradient(90deg, #cc00ff, #6600ff); }
+.connector-bottom-right .nav-node::before { background: linear-gradient(90deg, #ff0033, #ff9900); }
+
+.nav-node::after {
+    content: '';
+    position: absolute;
+    top: 2px; left: 2px; right: 2px; bottom: 2px;
+    background: rgba(10, 5, 25, 0.95);
+    z-index: -1;
+}
+.connector-top-left .nav-node::after, .connector-bottom-left .nav-node::after {
+    clip-path: polygon(15% 0, 100% 0, 100% 100%, 15% 100%, 0 50%);
+}
+.connector-top-right .nav-node::after, .connector-bottom-right .nav-node::after {
+    clip-path: polygon(0 0, 85% 0, 100% 50%, 85% 100%, 0 100%);
+}
+
+.node-icon {
+    width: 28px;
+    height: 28px;
+    margin-bottom: 2px;
+}
+.connector-top-left .node-icon { stroke: #00ccff; filter: drop-shadow(0 0 5px #00ccff); }
+.connector-top-right .node-icon { stroke: #00ccff; filter: drop-shadow(0 0 5px #00ccff); }
+.connector-bottom-left .node-icon { stroke: #ff00ff; filter: drop-shadow(0 0 5px #ff00ff); }
+.connector-bottom-right .node-icon { stroke: #ff9900; filter: drop-shadow(0 0 5px #ff9900); }
+
+.node-text {
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    color: #fff;
+    opacity: 0.9;
 }
 
 /* ---- PILL BUTTONS ---- */
@@ -1081,39 +1157,14 @@ body {
 ========================================= */
 @media (max-width: 1024px) {
     .nav-hub {
-        width: 400px;
-        height: 400px;
-    }
-    .hub-center {
-        width: 200px;
-        height: 200px;
-        padding: 30px;
+        transform: scale(0.85);
     }
 }
 
 @media (max-width: 768px) {
     .nav-hub {
-        width: 300px;
-        height: 300px;
+        transform: scale(0.65);
     }
-    .hub-center {
-        width: 150px;
-        height: 150px;
-        padding: 15px;
-    }
-    .hub-center h2 { font-size: 1.1rem; }
-    .hub-center h3 { font-size: 0.9rem; }
-    
-    .nav-btn {
-        width: 90px;
-        padding: 8px 0;
-        font-size: 0.8rem;
-    }
-    .nav-btn.top { top: -15px; }
-    .nav-btn.bottom { bottom: -15px; }
-    .nav-btn.left { left: -15px; }
-    .nav-btn.right { right: -15px; }
-    
     .contact-card {
         flex-direction: column;
         align-items: flex-start;
@@ -1123,26 +1174,8 @@ body {
 
 @media (max-width: 480px) {
     .nav-hub {
-        width: 250px;
-        height: 250px;
+        transform: scale(0.45);
     }
-    .hub-center {
-        width: 120px;
-        height: 120px;
-        padding: 10px;
-    }
-    .hub-center h2 { font-size: 0.9rem; }
-    .hub-center h3 { font-size: 0.8rem; }
-    
-    .nav-btn {
-        width: 80px;
-        padding: 5px 0;
-        font-size: 0.7rem;
-    }
-    .nav-btn.top { top: -10px; }
-    .nav-btn.bottom { bottom: -10px; }
-    .nav-btn.left { left: -10px; }
-    .nav-btn.right { right: -10px; }
     
     .modal-content {
         padding: 20px;
