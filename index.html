@@ -7,6 +7,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Roboto:wght@300;400;500;700&family=Righteous&family=Pacifico&family=Monoton&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="download.png">
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -63,20 +65,69 @@
     <!-- Main Menu Screen -->
     <div id="main-screen" class="hidden">
         <div class="background-overlay"></div>
-        
+
+        <!-- Top Navbar -->
+        <nav class="vc-navbar">
+            <div class="vc-logo">
+                <span class="logo-main">VICE'N'VIBES</span>
+                <span class="logo-sub">GTA HACKATHON</span>
+            </div>
+            <div class="vc-nav-links">
+                <a href="#" class="vc-link active">Home</a>
+                <a href="#" class="vc-link" onclick="document.querySelector('[data-target=about-panel]').click(); return false;">Events</a>
+                <a href="#" class="vc-link" onclick="document.querySelector('[data-target=faq-panel]').click(); return false;">FAQ</a>
+                <a href="#" class="vc-link" onclick="document.querySelector('[data-target=support-panel]').click(); return false;">Contact</a>
+                <a href="register.html" class="vc-login-btn">Register</a>
+            </div>
+        </nav>
+
         <div class="main-container">
-            <!-- Circular Navigation -->
+            <!-- Circular Navigation Hub -->
             <div class="nav-hub">
-                <div class="hub-center">
-                    <h2>Grand Tech Alliance</h2>
-                    <h3 class="neon-title">VIIT City</h3>
+
+                <!-- Top connector + ABOUT button -->
+                <div class="hub-connector connector-top">
+                    <div class="connector-line"></div>
+                    <button class="nav-btn-pill top" data-target="about-panel">
+                        <span class="pill-icon">📁</span> ABOUT <span class="pill-icon">🌴</span>
+                    </button>
                 </div>
-                <button class="nav-btn top" data-target="about-panel">ABOUT</button>
-                <a href="register.html" id="register-link" class="nav-btn right" style="display:flex; justify-content:center; align-items:center; text-decoration:none;">REGISTER</a>
-                <button class="nav-btn bottom" data-target="faq-panel">FAQ</button>
-                <button class="nav-btn left" data-target="support-panel">SUPPORT</button>
-                <div class="hub-ring ring-1"></div>
-                <div class="hub-ring ring-2"></div>
+
+                <!-- Left connector + REGISTER button -->
+                <div class="hub-connector connector-left">
+                    <div class="connector-line"></div>
+                    <a href="register.html" id="register-link" class="nav-btn-pill left">
+                        <span class="pill-icon">👤</span> REGISTER <span class="pill-icon">✏️</span>
+                    </a>
+                </div>
+
+                <!-- Right connector + SPONSORS button -->
+                <div class="hub-connector connector-right">
+                    <div class="connector-line"></div>
+                    <button class="nav-btn-pill right" data-target="support-panel">
+                        <span class="pill-icon">🤝</span> SPONSORS <span class="pill-icon">💼</span>
+                    </button>
+                </div>
+
+                <!-- Bottom connector + TIMELINE button -->
+                <div class="hub-connector connector-bottom">
+                    <div class="connector-line"></div>
+                    <button class="nav-btn-pill bottom" data-target="faq-panel">
+                        <span class="pill-icon">🕐</span> TIMELINE <span class="pill-icon">📅</span>
+                    </button>
+                </div>
+
+                <!-- Center Circle -->
+                <div class="hub-center">
+                    <div class="hub-ring ring-1"></div>
+                    <div class="hub-ring ring-2"></div>
+                    <div class="hub-inner-text">
+                        <span class="hub-title-big">VIIT</span>
+                        <span class="hub-title-mid">PRESENTS</span>
+                        <span class="hub-title-small">GTA HACKATHON</span>
+                    </div>
+                </div>
+
             </div>
 
             <!-- Content Panels -->
@@ -163,6 +214,15 @@
                 </div>
             </div>
         </div>
+
+        <!-- Footer -->
+        <footer class="vc-footer">
+            <a href="#">Home</a>
+            <a href="#" onclick="document.querySelector('[data-target=about-panel]').click(); return false;">Events</a>
+            <a href="#" onclick="document.querySelector('[data-target=faq-panel]').click(); return false;">FAQ</a>
+            <a href="#" onclick="document.querySelector('[data-target=support-panel]').click(); return false;">Sponsors</a>
+            <a href="register.html">Register</a>
+        </footer>
     </div>
 
     <script src="script.js"></script>
