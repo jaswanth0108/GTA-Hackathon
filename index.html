@@ -74,9 +74,9 @@
             </div>
             <div class="vc-nav-links">
                 <a href="#" class="vc-link active">Home</a>
-                <a href="#" class="vc-link" onclick="document.querySelector('[data-target=about-panel]').click(); return false;">Events</a>
+                <a href="#" class="vc-link" onclick="document.querySelector('[data-target=about-panel]').click(); return false;">Event Agenda</a>
                 <a href="#" class="vc-link" onclick="document.querySelector('[data-target=faq-panel]').click(); return false;">FAQ</a>
-                <a href="#" class="vc-link" onclick="document.querySelector('[data-target=support-panel]').click(); return false;">Contact</a>
+                <a href="#" class="vc-link" onclick="document.querySelector('[data-target=support-panel]').click(); return false;">Support</a>
                 <a href="register.html" class="vc-login-btn">Register</a>
             </div>
         </nav>
@@ -98,7 +98,7 @@
                         <div class="node-brackets"></div>
                         <div class="node-scanlines"></div>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="node-icon"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" x2="12" y1="19" y2="22"></line></svg>
-                        <span class="node-text">[COORDINATORS & FAQ]</span>
+                        <span class="node-text">[FAQ]</span>
                     </button>
                 </div>
 
@@ -143,7 +143,7 @@
                         <div class="node-brackets"></div>
                         <div class="node-scanlines"></div>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="node-icon"><path d="m11 17 2 2a1 1 0 1 0 3-3"></path><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"></path><path d="m21 3-6.5 6.5"></path><path d="M3 21l6.5-6.5"></path><path d="M14.5 9.5 9.32 4.32a3 3 0 0 0-4.24 0l-.88.88a1 1 0 0 0 0 1.41l2.81 2.81a5.79 5.79 0 0 1 .87 7.06l-.28.47a2 2 0 0 1-.25 1.42L4 21"></path></svg>
-                        <span class="node-text">[PARTNERS] & SPONSORS</span>
+                        <span class="node-text">[SUPPORT]</span>
                     </button>
                 </div>
 
@@ -169,16 +169,52 @@
                     
                     <!-- ABOUT PANEL -->
                     <div id="about-panel" class="panel hidden">
-                        <h2 class="panel-title">MISSION BRIEFING</h2>
-                        <div class="about-content">
-                            <h3>What is Grand Tech Alliance VIIT City?</h3>
-                            <p>A flagship engineering hackathon where first-year minds from every branch converge to build, prototype, and present multidisciplinary solutions.</p>
-                            
-                            <h3>Multidisciplinary by Design</h3>
-                            <p>Teams must mix branches — code meets circuit meets blueprint. Real engineering happens at the intersection.</p>
-                            
-                            <h3>Innovation Beyond Code</h3>
-                            <p>Submit CAD models, circuit diagrams, business flowcharts, or UI prototypes. Every form of engineering thinking counts.</p>
+                        <h2 class="panel-title">MISSION BRIEFING (EVENT AGENDA)</h2>
+                        <div class="mission-brief-container">
+                            <p class="mission-brief-intro">Select a briefing segment to initialize terminal data:</p>
+                            <div class="mission-node-list">
+                                <!-- Card 1 -->
+                                <div class="mission-card active">
+                                    <button class="mission-btn" data-mission="1">
+                                        <span class="mission-badge">MISSION 01</span>
+                                        <span class="mission-title">What is Grand Thech Alliance Viit City?</span>
+                                        <span class="mission-arrow">▼</span>
+                                    </button>
+                                    <div class="mission-body">
+                                        <div class="mission-text-wrapper">
+                                            <p class="mission-desc">A flagship engineering hackathon where first-year minds from every branch converge to build, prototype, and present multidisciplinary solutions.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Card 2 -->
+                                <div class="mission-card">
+                                    <button class="mission-btn" data-mission="2">
+                                        <span class="mission-badge">MISSION 02</span>
+                                        <span class="mission-title">Multidisciplinary by Design</span>
+                                        <span class="mission-arrow">▼</span>
+                                    </button>
+                                    <div class="mission-body">
+                                        <div class="mission-text-wrapper">
+                                            <p class="mission-desc">Teams must mix branches — code meets circuit meets blueprint. Real engineering happens at the intersection.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Card 3 -->
+                                <div class="mission-card">
+                                    <button class="mission-btn" data-mission="3">
+                                        <span class="mission-badge">MISSION 03</span>
+                                        <span class="mission-title">Innovation Beyond Code</span>
+                                        <span class="mission-arrow">▼</span>
+                                    </button>
+                                    <div class="mission-body">
+                                        <div class="mission-text-wrapper">
+                                            <p class="mission-desc">You can submit CAD models, circuit diagrams, business flowcharts, or UI prototypes. Every form of engineering thinking counts.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -217,7 +253,7 @@
 
                     <!-- SUPPORT PANEL -->
                     <div id="support-panel" class="panel hidden">
-                        <h2 class="panel-title">CONTACT FIXERS</h2>
+                        <h2 class="panel-title">SUPPORT (CONTACT FIXERS)</h2>
                         <div class="contact-list">
                             <div class="contact-card">
                                 <div class="contact-name">K. Rohit Kumar <span class="badge">(Head)</span></div>
@@ -249,9 +285,9 @@
         <!-- Footer -->
         <footer class="vc-footer">
             <a href="#">Home</a>
-            <a href="#" onclick="document.querySelector('[data-target=about-panel]').click(); return false;">Events</a>
+            <a href="#" onclick="document.querySelector('[data-target=about-panel]').click(); return false;">Event Agenda</a>
             <a href="#" onclick="document.querySelector('[data-target=faq-panel]').click(); return false;">FAQ</a>
-            <a href="#" onclick="document.querySelector('[data-target=support-panel]').click(); return false;">Sponsors</a>
+            <a href="#" onclick="document.querySelector('[data-target=support-panel]').click(); return false;">Support</a>
             <a href="register.html">Register</a>
         </footer>
     </div>

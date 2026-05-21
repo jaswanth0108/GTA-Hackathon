@@ -1046,23 +1046,121 @@ body {
 }
 
 /* =========================================
-   ABOUT PANEL
+   ABOUT PANEL (EVENT AGENDA)
 ========================================= */
-.about-content h3 {
-    color: var(--gta-blue);
-    font-family: var(--font-heading);
-    font-size: 1.5rem;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+.mission-brief-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
-.about-content p {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: #ddd;
-    margin-bottom: 20px;
+.mission-brief-intro {
+    font-family: monospace;
+    font-size: 1rem;
+    color: var(--gta-gold);
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.8;
+}
+
+.mission-node-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.mission-card {
+    background: rgba(15, 5, 25, 0.75);
+    border: 1px solid rgba(255, 0, 127, 0.2);
+    border-radius: 6px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.mission-card:hover {
+    border-color: var(--vc-cyan);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.mission-btn {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 24px;
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.3s;
+}
+
+.mission-btn:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.mission-badge {
+    font-family: monospace;
+    font-size: 0.9rem;
+    color: var(--vc-pink);
+    font-weight: bold;
+    border: 1px solid var(--vc-pink);
+    padding: 2px 8px;
+    border-radius: 3px;
+    margin-right: 15px;
+    text-shadow: 0 0 5px rgba(255, 0, 127, 0.5);
+    flex-shrink: 0;
+}
+
+.mission-title {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    color: #fff;
+    flex-grow: 1;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-shadow: 0 0 4px rgba(255, 255, 255, 0.2);
+    transition: color 0.3s;
+}
+
+.mission-card:hover .mission-title {
+    color: var(--vc-cyan);
+    text-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
+}
+
+.mission-arrow {
+    font-size: 1rem;
+    color: var(--gta-gold);
+    transition: transform 0.3s;
+    text-shadow: 0 0 5px rgba(255, 193, 7, 0.5);
+}
+
+.mission-card.active .mission-arrow {
+    transform: rotate(180deg);
+}
+
+.mission-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mission-text-wrapper {
+    padding: 0 24px 24px 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.mission-desc {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #e0e0e0;
+    margin: 0;
+    padding-top: 15px;
+    font-family: var(--font-body);
 }
 
 /* =========================================

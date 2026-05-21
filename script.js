@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
     /* =====================================
        MODAL & NAVIGATION LOGIC
     ===================================== */
-    const navBtns = document.querySelectorAll('.nav-btn');
+    const navBtns = document.querySelectorAll('.nav-node, .nav-btn');
     const contentModal = document.getElementById('content-modal');
     const closeModal = document.getElementById('close-modal');
     const modalBackdrop = document.getElementById('modal-close');
@@ -89,6 +89,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         // Show modal container
         contentModal.classList.remove('hidden');
+
+        // Adjust active Event Agenda card height when opened
+        if (targetId === 'about-panel') {
+            setTimeout(() => {
+                document.querySelectorAll('.mission-card').forEach(card => {
+                    const body = card.querySelector('.mission-body');
+                    if (card.classList.contains('active') && body) {
+                        body.style.maxHeight = body.scrollHeight + 'px';
+                    }
+                });
+            }, 100);
+        }
     };
 
     const closePanel = () => {
@@ -129,6 +141,34 @@ document.addEventListener('DOMContentLoaded', () => {
                 content.style.maxHeight = content.scrollHeight + 'px';
             }
         });
+    });
+
+    /* =====================================
+       EVENT AGENDA MISSION ACCORDION
+    ===================================== */
+    const missionCards = document.querySelectorAll('.mission-card');
+    
+    missionCards.forEach(card => {
+        const btn = card.querySelector('.mission-btn');
+        if (btn) {
+            btn.addEventListener('click', () => {
+                const isActive = card.classList.contains('active');
+                
+                // Close all others
+                missionCards.forEach(otherCard => {
+                    otherCard.classList.remove('active');
+                    const body = otherCard.querySelector('.mission-body');
+                    if (body) body.style.maxHeight = null;
+                });
+                
+                // Open selected
+                if (!isActive) {
+                    card.classList.add('active');
+                    const body = card.querySelector('.mission-body');
+                    if (body) body.style.maxHeight = body.scrollHeight + 'px';
+                }
+            });
+        }
     });
 
     /* =====================================
