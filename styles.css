@@ -316,7 +316,7 @@ body {
     left: 0;
     width: 100vw;
     height: 100dvh;
-    background: url('bg.png') no-repeat center center;
+    background: url('Reference image.png') no-repeat center center;
     background-size: cover;
     z-index: 10;
     transition: opacity 1s ease-in-out;
@@ -330,9 +330,9 @@ body {
     top: 0; left: 0;
     width: 100%; height: 100%;
     background: linear-gradient(180deg,
-        rgba(10,5,30,0.55) 0%,
-        rgba(20,5,40,0.3) 40%,
-        rgba(10,5,30,0.65) 100%
+        rgba(5,2,18,0.35) 0%,
+        rgba(10,2,25,0.15) 45%,
+        rgba(5,2,18,0.45) 100%
     );
     z-index: 0;
 }
@@ -471,29 +471,31 @@ body {
     transform: translate(-50%, -50%);
 }
 
-/* Outer pink ring */
+/* Outer pink ring — thick neon tube */
 .ring-1 {
-    width: 300px;
-    height: 300px;
-    border: 5px solid #ff0099;
+    width: 310px;
+    height: 310px;
+    border: 7px solid #ff0099;
     box-shadow:
-        0 0 12px #ff0099,
-        0 0 30px rgba(255, 0, 153, 0.6),
-        0 0 60px rgba(255, 0, 153, 0.3),
-        inset 0 0 15px rgba(255, 0, 153, 0.2);
+        0 0 8px #ff0099,
+        0 0 20px #ff0099,
+        0 0 45px rgba(255, 0, 153, 0.7),
+        0 0 90px rgba(255, 0, 153, 0.25),
+        inset 0 0 8px rgba(255, 0, 153, 0.3);
     z-index: 1;
 }
 
-/* Inner cyan ring */
+/* Inner cyan ring — thick neon tube */
 .ring-2 {
-    width: 238px;
-    height: 238px;
-    border: 4px solid #00ccff;
+    width: 245px;
+    height: 245px;
+    border: 5px solid #00ccff;
     box-shadow:
-        0 0 10px #00ccff,
-        0 0 25px rgba(0, 204, 255, 0.6),
-        0 0 50px rgba(0, 204, 255, 0.3),
-        inset 0 0 12px rgba(0, 204, 255, 0.15);
+        0 0 8px #00ccff,
+        0 0 20px #00ccff,
+        0 0 40px rgba(0, 204, 255, 0.7),
+        0 0 80px rgba(0, 204, 255, 0.25),
+        inset 0 0 8px rgba(0, 204, 255, 0.3);
     z-index: 1;
 }
 
@@ -554,38 +556,38 @@ body {
 
 /* TOP — button above ring, line drops down to ring */
 .connector-top {
-    bottom: calc(50% + 150px); /* places bottom edge at ring top */
+    bottom: calc(50% + 155px);
     left: 50%;
     transform: translateX(-50%);
-    flex-direction: column;    /* button on top, line below */
+    flex-direction: column;
     justify-content: flex-end;
     align-items: center;
 }
 
 /* BOTTOM — button below ring, line rises up to ring */
 .connector-bottom {
-    top: calc(50% + 150px);  /* places top edge at ring bottom */
+    top: calc(50% + 155px);
     left: 50%;
     transform: translateX(-50%);
-    flex-direction: column;    /* line on top, button below */
+    flex-direction: column;
     align-items: center;
 }
 
 /* LEFT — button left of ring, line goes right to ring */
 .connector-left {
-    right: calc(50% + 150px);  /* places right edge at ring left */
+    right: calc(50% + 155px);
     top: 50%;
     transform: translateY(-50%);
-    flex-direction: row;       /* button left, line right */
+    flex-direction: row;
     align-items: center;
 }
 
 /* RIGHT — button right of ring, line goes left to ring */
 .connector-right {
-    left: calc(50% + 150px);   /* places left edge at ring right */
+    left: calc(50% + 155px);
     top: 50%;
     transform: translateY(-50%);
-    flex-direction: row-reverse; /* line left, button right */
+    flex-direction: row-reverse;
     align-items: center;
 }
 
