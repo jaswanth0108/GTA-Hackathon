@@ -440,7 +440,28 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    animation: scale-up 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation: scale-up 1s cubic-bezier(0.175, 0.885, 0.32, 1.275), hubFloat 6s ease-in-out infinite;
+}
+
+@keyframes hubFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+/* CRT Scanline Overlay */
+.hub-scanlines {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0),
+        rgba(255, 255, 255, 0) 2px,
+        rgba(0, 0, 0, 0.1) 3px,
+        rgba(0, 0, 0, 0.1) 4px
+    );
+    z-index: 10;
+    opacity: 0.5;
 }
 
 /* ---- CENTER CIRCLE (rings + text live here) ---- */
@@ -483,6 +504,7 @@ body {
         0 0 90px rgba(255, 0, 153, 0.25),
         inset 0 0 8px rgba(255, 0, 153, 0.3);
     z-index: 1;
+    animation: pulseGlowPink 3s infinite alternate;
 }
 
 /* Inner cyan ring — thick neon tube */
@@ -497,6 +519,32 @@ body {
         0 0 80px rgba(0, 204, 255, 0.25),
         inset 0 0 8px rgba(0, 204, 255, 0.3);
     z-index: 1;
+    animation: pulseGlowCyan 2.5s infinite alternate;
+}
+
+/* Rotating Dashed Radar Ring */
+.ring-3 {
+    width: 280px;
+    height: 280px;
+    border: 2px dashed rgba(255, 255, 255, 0.4);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2), inset 0 0 10px rgba(255, 255, 255, 0.2);
+    z-index: 2;
+    animation: spinDash 20s linear infinite;
+}
+
+@keyframes pulseGlowPink {
+    0% { filter: brightness(1); transform: translate(-50%, -50%) scale(1); }
+    100% { filter: brightness(1.3); transform: translate(-50%, -50%) scale(1.01); }
+}
+
+@keyframes pulseGlowCyan {
+    0% { filter: brightness(1); transform: translate(-50%, -50%) scale(1); }
+    100% { filter: brightness(1.4); transform: translate(-50%, -50%) scale(0.99); }
+}
+
+@keyframes spinDash {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
 /* ---- CENTER TEXT ---- */
@@ -516,6 +564,7 @@ body {
     font-weight: 900;
     font-style: italic;
     background: linear-gradient(180deg, #e6f0ff 0%, #6890cc 45%, #ff00ff 55%, #00ffff 100%);
+    background-size: 100% 200%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -523,6 +572,12 @@ body {
     line-height: 1.1;
     filter: drop-shadow(0 0 10px rgba(255, 0, 255, 0.8));
     margin-bottom: 5px;
+    animation: textShimmer 3s ease infinite alternate;
+}
+
+@keyframes textShimmer {
+    0% { background-position: 0% 0%; filter: drop-shadow(0 0 8px rgba(255, 0, 255, 0.6)); }
+    100% { background-position: 0% 100%; filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.9)); }
 }
 
 .hub-title-mid {
@@ -586,6 +641,26 @@ body {
     position: relative;
     box-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
     flex-shrink: 0;
+    overflow: hidden;
+}
+
+/* Energy pulse traveling along the line */
+.energy-pulse {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 2px;
+    background: #fff;
+    box-shadow: 0 0 8px #fff, 0 0 15px #00ffff;
+    animation: pulseTravel 2s linear infinite;
+}
+
+@keyframes pulseTravel {
+    0% { transform: translateX(-20px); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateX(60px); opacity: 0; }
 }
 
 /* Circuit tick marks on connector lines */
@@ -615,13 +690,30 @@ body {
     cursor: pointer;
     width: 220px;
     height: 90px;
-    background: rgba(10, 5, 25, 0.85);
-    backdrop-filter: blur(8px);
-    transition: all 0.3s ease;
+    background: rgba(10, 5, 25, 0.6);
+    backdrop-filter: blur(12px);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     border: none;
     outline: none;
     position: relative;
     margin-left: 5px;
+    overflow: hidden;
+}
+
+/* Scanlines inside nodes */
+.node-scanlines {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0),
+        rgba(255, 255, 255, 0) 1px,
+        rgba(0, 255, 255, 0.05) 2px,
+        rgba(0, 255, 255, 0.05) 3px
+    );
+    z-index: -1;
+    opacity: 0.6;
 }
 
 /* Node specific inverse rotation */
@@ -630,11 +722,12 @@ body {
     clip-path: polygon(15% 0, 100% 0, 100% 100%, 15% 100%, 0 50%);
     border-left: 3px solid #6600ff;
     border-right: 3px solid #0066ff;
-    box-shadow: inset 0 0 15px rgba(102, 0, 255, 0.5), inset 0 0 15px rgba(0, 102, 255, 0.5);
+    box-shadow: inset 0 0 20px rgba(102, 0, 255, 0.6), inset 0 0 20px rgba(0, 102, 255, 0.6);
 }
 .connector-top-left:hover .nav-node {
-    transform: rotate(135deg) scale(1.05);
-    background: rgba(102, 0, 255, 0.2);
+    transform: rotate(135deg) scale(1.1);
+    background: rgba(102, 0, 255, 0.3);
+    box-shadow: inset 0 0 30px rgba(102, 0, 255, 0.8), 0 0 15px rgba(102, 0, 255, 0.5);
 }
 
 .connector-top-right .nav-node {
@@ -642,11 +735,12 @@ body {
     clip-path: polygon(0 0, 85% 0, 100% 50%, 85% 100%, 0 100%);
     border-left: 3px solid #00ccff;
     border-right: 3px solid #0066ff;
-    box-shadow: inset 0 0 15px rgba(0, 204, 255, 0.5);
+    box-shadow: inset 0 0 20px rgba(0, 204, 255, 0.6);
 }
 .connector-top-right:hover .nav-node {
-    transform: rotate(45deg) scale(1.05);
-    background: rgba(0, 204, 255, 0.2);
+    transform: rotate(45deg) scale(1.1);
+    background: rgba(0, 204, 255, 0.3);
+    box-shadow: inset 0 0 30px rgba(0, 204, 255, 0.8), 0 0 15px rgba(0, 204, 255, 0.5);
 }
 
 .connector-bottom-left .nav-node {
@@ -654,11 +748,12 @@ body {
     clip-path: polygon(15% 0, 100% 0, 100% 100%, 15% 100%, 0 50%);
     border-left: 3px solid #cc00ff;
     border-right: 3px solid #6600ff;
-    box-shadow: inset 0 0 15px rgba(204, 0, 255, 0.5);
+    box-shadow: inset 0 0 20px rgba(204, 0, 255, 0.6);
 }
 .connector-bottom-left:hover .nav-node {
-    transform: rotate(-135deg) scale(1.05);
-    background: rgba(204, 0, 255, 0.2);
+    transform: rotate(-135deg) scale(1.1);
+    background: rgba(204, 0, 255, 0.3);
+    box-shadow: inset 0 0 30px rgba(204, 0, 255, 0.8), 0 0 15px rgba(204, 0, 255, 0.5);
 }
 
 .connector-bottom-right .nav-node {
@@ -666,11 +761,12 @@ body {
     clip-path: polygon(0 0, 85% 0, 100% 50%, 85% 100%, 0 100%);
     border-left: 3px solid #ff9900;
     border-right: 3px solid #ff0033;
-    box-shadow: inset 0 0 15px rgba(255, 153, 0, 0.5);
+    box-shadow: inset 0 0 20px rgba(255, 153, 0, 0.6);
 }
 .connector-bottom-right:hover .nav-node {
-    transform: rotate(-45deg) scale(1.05);
-    background: rgba(255, 153, 0, 0.2);
+    transform: rotate(-45deg) scale(1.1);
+    background: rgba(255, 153, 0, 0.3);
+    box-shadow: inset 0 0 30px rgba(255, 153, 0, 0.8), 0 0 15px rgba(255, 153, 0, 0.5);
 }
 
 /* Add custom colored borders since clip-path cuts off CSS borders sometimes */
