@@ -1396,6 +1396,71 @@ body {
 }
 
 /* =========================================
+   AGENDA TABLE (GTA THEME)
+========================================= */
+.agenda-table-container {
+    width: 100%;
+    overflow-x: auto;
+    margin-bottom: 25px;
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    border-radius: 8px;
+    background: rgba(10, 5, 25, 0.6);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.1), inset 0 0 20px rgba(255, 0, 255, 0.05);
+}
+
+.gta-agenda-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Roboto', sans-serif;
+    color: #e6f0ff;
+    text-align: left;
+}
+
+.gta-agenda-table th {
+    background: rgba(255, 0, 255, 0.15);
+    color: #ff00ff;
+    font-family: 'Righteous', sans-serif;
+    letter-spacing: 2px;
+    padding: 15px 20px;
+    border-bottom: 2px solid #ff00ff;
+    text-shadow: 0 0 5px #ff00ff;
+    font-size: 1.1rem;
+    white-space: nowrap;
+}
+
+.gta-agenda-table td {
+    padding: 12px 20px;
+    border-bottom: 1px solid rgba(0, 255, 255, 0.15);
+    transition: background 0.3s ease;
+}
+
+.gta-agenda-table tbody tr:hover td {
+    background: rgba(0, 255, 255, 0.1);
+}
+
+.gta-agenda-table .time-col {
+    color: #00ffff;
+    font-weight: 700;
+    white-space: nowrap;
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+    width: 15%;
+}
+
+.gta-agenda-table .phase-col {
+    color: #ffeb3b;
+    font-weight: 600;
+    width: 30%;
+    letter-spacing: 0.5px;
+}
+
+.gta-agenda-table .details-col {
+    color: #cccccc;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    width: 55%;
+}
+
+/* =========================================
    RESPONSIVE DESIGN
 ========================================= */
 @media (max-width: 1024px) {
