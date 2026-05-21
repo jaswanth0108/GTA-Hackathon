@@ -440,7 +440,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    animation: scale-up 1s cubic-bezier(0.175, 0.885, 0.32, 1.275), hubFloat 6s ease-in-out infinite;
+    scale: clamp(0.4, calc(80vh / 640), 0.9);
+    animation: hubFloat 6s ease-in-out infinite;
 }
 
 @keyframes hubFloat {
@@ -1399,13 +1400,13 @@ body {
 ========================================= */
 @media (max-width: 1024px) {
     .nav-hub {
-        transform: scale(0.85);
+        scale: clamp(0.4, calc(80vh / 640), 0.85);
     }
 }
 
 @media (max-width: 768px) {
     .nav-hub {
-        transform: scale(0.65);
+        scale: 0.65;
     }
     .contact-card {
         flex-direction: column;
@@ -1416,7 +1417,7 @@ body {
 
 @media (max-width: 480px) {
     .nav-hub {
-        transform: scale(0.45);
+        scale: 0.45;
     }
     
     .modal-content {
