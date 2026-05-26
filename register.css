@@ -236,6 +236,84 @@ body {
 .hidden { display: none !important; }
 
 /* =========================================
+   PAYMENT PORTAL STYLES
+========================================= */
+.payment-title {
+    text-align: center;
+    color: var(--vc-cyan);
+    font-size: 2rem;
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+}
+
+.payment-amount-display {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #fff;
+    margin-bottom: 20px;
+}
+.payment-amount-display span {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--vc-pink);
+    text-shadow: 0 0 8px rgba(255, 0, 255, 0.8);
+}
+
+.qr-container {
+    text-align: center;
+    margin-bottom: 25px;
+}
+.payment-qr {
+    max-width: 200px;
+    border: 3px solid var(--vc-cyan);
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+}
+
+.file-upload-group {
+    text-align: center;
+    margin-top: 10px;
+}
+.file-upload-group input[type="file"] {
+    display: none;
+}
+.file-upload-group .file-label {
+    display: inline-block;
+    padding: 12px 20px;
+    background: rgba(0, 255, 255, 0.1);
+    border: 2px dashed var(--vc-cyan);
+    color: var(--vc-cyan);
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+.file-upload-group .file-label:hover {
+    background: rgba(0, 255, 255, 0.2);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+.button-group {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+.button-group .secondary-btn {
+    background: transparent;
+    border: 2px solid var(--vc-pink);
+    color: var(--vc-pink);
+    box-shadow: 0 0 10px rgba(255, 0, 255, 0.2);
+    flex: 0.4;
+}
+.button-group .secondary-btn:hover {
+    background: rgba(255, 0, 255, 0.1);
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.6);
+}
+.button-group .submit-btn {
+    flex: 1;
+}
+
+/* =========================================
    RESPONSIVE DESIGN
 ========================================= */
 @media (max-width: 900px) {

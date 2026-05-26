@@ -68,15 +68,69 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    registrationForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
+    const step1 = document.getElementById('step-1');
+    const step2 = document.getElementById('step-2');
+    const proceedBtn = document.getElementById('proceed-btn');
+    const backBtn = document.getElementById('back-btn');
+    const paymentAmountSpan = document.getElementById('payment-amount');
+    const receiptUpload = document.getElementById('receipt-upload');
+    const fileNameSpan = document.getElementById('file-name');
+    
+    let base64Receipt = '';
+
+    // Update file name on selection
+    receiptUpload.addEventListener('change', function() {
+        if (this.files && this.files[0]) {
+            fileNameSpan.textContent = this.files[0].name;
+            
+            // Read file as Base64 immediately
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                // e.target.result contains the base64 data URL
+                base64Receipt = e.target.result;
+            };
+            reader.readAsDataURL(this.files[0]);
+        } else {
+            fileNameSpan.textContent = 'Upload Paid Receipt Screenshot';
+            base64Receipt = '';
+        }
+    });
+
+    // PROCEED TO PAYMENT
+    proceedBtn.addEventListener('click', () => {
+        // Simple HTML5 validation check
+        if (!registrationForm.reportValidity()) {
+            return; // Browser will show validation UI for empty required fields
+        }
+
         const teamSize = parseInt(teamSizeSelect.value);
         if (isNaN(teamSize) || teamSize < 3 || teamSize > 4) {
             alert("Team size must be between 3 and 4 members.");
             return;
         }
+
+        // Calculate fee
+        const amount = teamSize * 200;
+        paymentAmountSpan.textContent = `₹${amount}/-`;
+
+        // Transition to Step 2
+        step1.classList.add('hidden');
+        step2.classList.remove('hidden');
+    });
+
+    // BACK BUTTON
+    backBtn.addEventListener('click', () => {
+        step2.classList.add('hidden');
+        step1.classList.remove('hidden');
+    });
+
+    // FINAL SUBMISSION
+    registrationForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const teamSize = parseInt(teamSizeSelect.value);
         const teamName = document.getElementById('team-name').value;
+        const transactionId = document.getElementById('transaction-id').value;
         const members = [];
 
         for (let i = 1; i <= teamSize; i++) {
@@ -97,10 +151,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const payload = {
             teamName: teamName,
             teamSize: teamSize,
-            members: members
+            members: members,
+            payment: {
+                transactionId: transactionId,
+                receiptBase64: base64Receipt,
+                amountPaid: teamSize * 200
+            }
         };
 
-        const submitBtn = registrationForm.querySelector('.submit-btn');
+        const submitBtn = step2.querySelector('.submit-btn');
+        const originalText = submitBtn.innerText;
         submitBtn.innerText = "SUBMITTING...";
         submitBtn.disabled = true;
 
@@ -129,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .catch(err => {
             console.error("Error submitting form:", err);
             alert("Submission failed. Please check your internet connection.");
-            submitBtn.innerText = "SUBMIT REGISTRATION";
+            submitBtn.innerText = originalText;
             submitBtn.disabled = false;
         });
     });
