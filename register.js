@@ -78,18 +78,47 @@ document.addEventListener('DOMContentLoaded', () => {
     
     let base64Receipt = '';
 
-    // Update file name on selection
+    // Update file name and compress image on selection
     receiptUpload.addEventListener('change', function() {
         if (this.files && this.files[0]) {
-            fileNameSpan.textContent = this.files[0].name;
+            const file = this.files[0];
+            fileNameSpan.textContent = file.name;
             
-            // Read file as Base64 immediately
+            // Read file and compress it to avoid Google Apps Script size limits
             const reader = new FileReader();
             reader.onload = function(e) {
-                // e.target.result contains the base64 data URL
-                base64Receipt = e.target.result;
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    const MAX_WIDTH = 800;
+                    const MAX_HEIGHT = 800;
+                    let width = img.width;
+                    let height = img.height;
+
+                    // Calculate new dimensions
+                    if (width > height) {
+                        if (width > MAX_WIDTH) {
+                            height *= MAX_WIDTH / width;
+                            width = MAX_WIDTH;
+                        }
+                    } else {
+                        if (height > MAX_HEIGHT) {
+                            width *= MAX_HEIGHT / height;
+                            height = MAX_HEIGHT;
+                        }
+                    }
+
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+
+                    // Compress to JPEG with 0.7 quality (drastically reduces base64 string size)
+                    base64Receipt = canvas.toDataURL('image/jpeg', 0.7);
+                };
+                img.src = e.target.result;
             };
-            reader.readAsDataURL(this.files[0]);
+            reader.readAsDataURL(file);
         } else {
             fileNameSpan.textContent = 'Upload Paid Receipt Screenshot';
             base64Receipt = '';
