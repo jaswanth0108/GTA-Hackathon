@@ -295,12 +295,17 @@ body {
 
 .caution-message {
     text-align: center;
-    color: var(--vc-pink);
-    font-size: 0.85rem;
+    color: #fff;
+    font-size: 0.9rem;
     margin-top: 15px;
-    font-style: italic;
-    opacity: 0.9;
-    text-shadow: 0 0 5px rgba(255, 0, 255, 0.5);
+    padding: 12px;
+    background: rgba(255, 0, 153, 0.15);
+    border: 1px dashed var(--vc-pink);
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(255, 0, 153, 0.3), inset 0 0 10px rgba(255, 0, 153, 0.2);
+    text-shadow: 0 0 5px var(--vc-pink);
+    font-weight: bold;
+    letter-spacing: 0.5px;
 }
 
 .button-group {
