@@ -204,41 +204,30 @@ document.addEventListener('DOMContentLoaded', () => {
         submitBtn.innerText = "SUBMITTING...";
         submitBtn.disabled = true;
 
-        if (SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL') {
-            // Fallback for local testing if URL isn't set up yet
-            console.log("Payload:", payload);
-            setTimeout(() => {
-                registrationForm.classList.add('hidden');
-                successMessage.classList.remove('hidden');
-            }, 1000);
-            return;
-        }
-
-        // Build FormData - works perfectly with no-cors (no preflight issues)
-        const formData = new FormData();
-        formData.append('teamName', teamName);
-        formData.append('teamSize', teamSize);
-        formData.append('amountPaid', teamSize * 200);
-        formData.append('transactionId', transactionId);
-        // Members as JSON string
-        formData.append('members', JSON.stringify(members));
-        // Append image as base64 string
+        // Build URLSearchParams — the most reliable format for Google Apps Script
+        // This sends as application/x-www-form-urlencoded (simple request, no CORS preflight)
+        const params = new URLSearchParams();
+        params.append('teamName', teamName);
+        params.append('teamSize', teamSize);
+        params.append('amountPaid', teamSize * 200);
+        params.append('transactionId', transactionId);
+        params.append('members', JSON.stringify(members));
         if (base64Receipt) {
-            formData.append('receiptBase64', base64Receipt);
+            params.append('receiptBase64', base64Receipt);
         }
 
         fetch(SCRIPT_URL, {
             method: 'POST',
             mode: 'no-cors',
-            body: formData
+            body: params
         })
         .then(() => {
             registrationForm.classList.add('hidden');
             successMessage.classList.remove('hidden');
         })
         .catch(err => {
-            console.error("Error submitting form:", err);
-            alert("Submission failed. Please check your internet connection.");
+            console.error("Submission error:", err);
+            alert("Submission failed. Please check your internet connection and try again.");
             submitBtn.innerText = originalText;
             submitBtn.disabled = false;
         });
