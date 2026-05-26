@@ -33,6 +33,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         ${generateBranchOptions()}
                     </select>
                 </div>
+                <div class="form-group">
+                    <input type="email" id="member${index}-email" required placeholder=" ">
+                    <label for="member${index}-email">Email ID</label>
+                </div>
         `;
 
         if (isHead) {
@@ -40,10 +44,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="form-group">
                     <input type="tel" id="head-phone" required pattern="[0-9]{10}" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')" placeholder=" ">
                     <label for="head-phone">Phone Number (10 digits)</label>
-                </div>
-                <div class="form-group">
-                    <input type="email" id="head-email" required placeholder=" ">
-                    <label for="head-email">Email ID</label>
                 </div>
                 <div class="form-group">
                     <input type="text" id="head-college" required placeholder=" ">
@@ -189,11 +189,11 @@ document.addEventListener('DOMContentLoaded', () => {
         for (let i = 1; i <= teamSize; i++) {
             const member = {
                 name: document.getElementById(`member${i}-name`).value,
-                branch: document.getElementById(`member${i}-branch`).value
+                branch: document.getElementById(`member${i}-branch`).value,
+                email: document.getElementById(`member${i}-email`).value
             };
             if (i === 1) {
                 member.phone = document.getElementById('head-phone').value;
-                member.email = document.getElementById('head-email').value;
                 member.college = document.getElementById('head-college').value;
             }
             members.push(member);
