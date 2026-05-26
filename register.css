@@ -122,8 +122,18 @@ body {
 .register-note {
     text-align: center;
     color: var(--vc-pink);
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     font-style: italic;
+}
+
+.register-subnote {
+    text-align: center;
+    color: var(--vc-cyan);
+    margin-bottom: 30px;
+    font-family: 'Righteous', sans-serif;
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+    text-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
 }
 
 /* FORM STYLES */
