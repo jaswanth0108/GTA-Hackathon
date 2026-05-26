@@ -700,144 +700,87 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 0;
     font-family: 'Righteous', sans-serif;
     color: #fff;
     text-decoration: none;
     text-transform: uppercase;
     cursor: pointer;
-    width: 220px;
-    height: 90px;
+    width: 140px;
+    height: 140px;
     background: rgba(10, 5, 30, 0.7);
     backdrop-filter: blur(12px);
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    border: none;
+    border: 3px solid transparent;
     outline: none;
     position: relative;
     margin-left: 8px;
     overflow: hidden;
-    border-radius: 4px;
+    transform: rotate(45deg);
+    border-radius: 0;
+    border-image: linear-gradient(45deg, #ff00ff, #00ffff, #ff9900) 1;
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.3), inset 0 0 15px rgba(0, 255, 255, 0.2);
+}
+
+.node-inner {
+    transform: rotate(-45deg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    height: 100%;
 }
 
 /* Mechanical Corner Brackets */
 .node-brackets {
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    pointer-events: none;
-    z-index: 5;
-    transition: all 0.3s ease;
+    display: none;
 }
 
-.node-brackets::before,
-.node-brackets::after {
-    content: '';
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    border-color: #fff;
-    border-style: solid;
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.node-brackets::before {
-    top: 0; left: 0;
-    border-width: 2px 0 0 2px;
-}
-
-.node-brackets::after {
-    bottom: 0; right: 0;
-    border-width: 0 2px 2px 0;
-}
-
-.nav-node:hover .node-brackets {
-    transform: scale(1.08);
-}
-.nav-node:hover .node-brackets::before,
-.nav-node:hover .node-brackets::after {
-    border-color: #fff;
-    box-shadow: 0 0 10px #fff;
-}
-
-/* Scanlines inside nodes */
 .node-scanlines {
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    pointer-events: none;
-    background: repeating-linear-gradient(
-        to bottom,
-        rgba(255, 255, 255, 0),
-        rgba(255, 255, 255, 0) 2px,
-        rgba(0, 255, 255, 0.1) 3px,
-        rgba(0, 255, 255, 0.1) 4px
-    );
-    z-index: 1;
-    opacity: 0.6;
-    transition: opacity 0.3s ease;
-}
-
-.nav-node:hover .node-scanlines {
-    opacity: 1;
+    display: none;
 }
 
 /* Node specific styles (inverse rotation + custom borders/glows) */
 .connector-top-left .nav-node {
-    transform: rotate(135deg);
-    border-top: 3px solid #6600ff;
-    border-bottom: 3px solid #0066ff;
-    border-left: 1px solid rgba(102, 0, 255, 0.3);
-    border-right: 1px solid rgba(0, 102, 255, 0.3);
-    box-shadow: 0 0 15px rgba(0, 102, 255, 0.3), inset 0 0 20px rgba(102, 0, 255, 0.4);
+    transform: translate(-10px, -10px) rotate(45deg);
 }
 .connector-top-left .node-brackets::before, .connector-top-left .node-brackets::after { border-color: #00ccff; }
 .connector-top-left:hover .nav-node {
-    transform: rotate(135deg) scale(1.1);
-    background: rgba(102, 0, 255, 0.3);
-    box-shadow: 0 0 30px rgba(102, 0, 255, 0.8), inset 0 0 30px rgba(102, 0, 255, 0.8);
+    transform: translate(-15px, -15px) rotate(45deg) scale(1.05);
+    box-shadow: 0 0 25px rgba(0, 204, 255, 0.6), inset 0 0 20px rgba(0, 204, 255, 0.4);
+    background: rgba(0, 204, 255, 0.1);
 }
 
 .connector-top-right .nav-node {
-    transform: rotate(45deg);
-    border-top: 3px solid #00ccff;
-    border-bottom: 3px solid #0066ff;
-    border-left: 1px solid rgba(0, 204, 255, 0.3);
-    border-right: 1px solid rgba(0, 102, 255, 0.3);
-    box-shadow: 0 0 15px rgba(0, 102, 255, 0.3), inset 0 0 20px rgba(0, 204, 255, 0.4);
+    transform: translate(10px, -10px) rotate(45deg);
 }
 .connector-top-right .node-brackets::before, .connector-top-right .node-brackets::after { border-color: #00ffff; }
 .connector-top-right:hover .nav-node {
-    transform: rotate(45deg) scale(1.1);
-    background: rgba(0, 204, 255, 0.3);
-    box-shadow: 0 0 30px rgba(0, 204, 255, 0.8), inset 0 0 30px rgba(0, 204, 255, 0.8);
+    transform: translate(15px, -15px) rotate(45deg) scale(1.05);
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.6), inset 0 0 20px rgba(0, 255, 255, 0.4);
+    background: rgba(0, 255, 255, 0.1);
 }
 
 .connector-bottom-left .nav-node {
-    transform: rotate(-135deg);
-    border-top: 3px solid #cc00ff;
-    border-bottom: 3px solid #6600ff;
-    border-left: 1px solid rgba(204, 0, 255, 0.3);
-    border-right: 1px solid rgba(102, 0, 255, 0.3);
-    box-shadow: 0 0 15px rgba(102, 0, 255, 0.3), inset 0 0 20px rgba(204, 0, 255, 0.4);
+    transform: translate(-10px, 10px) rotate(45deg);
 }
 .connector-bottom-left .node-brackets::before, .connector-bottom-left .node-brackets::after { border-color: #ff00ff; }
 .connector-bottom-left:hover .nav-node {
-    transform: rotate(-135deg) scale(1.1);
-    background: rgba(204, 0, 255, 0.3);
-    box-shadow: 0 0 30px rgba(204, 0, 255, 0.8), inset 0 0 30px rgba(204, 0, 255, 0.8);
+    transform: translate(-15px, 15px) rotate(45deg) scale(1.05);
+    box-shadow: 0 0 25px rgba(255, 0, 255, 0.6), inset 0 0 20px rgba(255, 0, 255, 0.4);
+    background: rgba(255, 0, 255, 0.1);
 }
 
 .connector-bottom-right .nav-node {
-    transform: rotate(-45deg);
-    border-top: 3px solid #ff9900;
-    border-bottom: 3px solid #ff0033;
-    border-left: 1px solid rgba(255, 153, 0, 0.3);
-    border-right: 1px solid rgba(255, 0, 51, 0.3);
-    box-shadow: 0 0 15px rgba(255, 0, 51, 0.3), inset 0 0 20px rgba(255, 153, 0, 0.4);
+    transform: translate(10px, 10px) rotate(45deg);
 }
 .connector-bottom-right .node-brackets::before, .connector-bottom-right .node-brackets::after { border-color: #ffcc00; }
 .connector-bottom-right:hover .nav-node {
-    transform: rotate(-45deg) scale(1.1);
-    background: rgba(255, 153, 0, 0.3);
-    box-shadow: 0 0 30px rgba(255, 153, 0, 0.8), inset 0 0 30px rgba(255, 153, 0, 0.8);
+    transform: translate(15px, 15px) rotate(45deg) scale(1.05);
+    box-shadow: 0 0 25px rgba(255, 204, 0, 0.6), inset 0 0 20px rgba(255, 204, 0, 0.4);
+    background: rgba(255, 204, 0, 0.1);
 }
 
 .node-icon {
