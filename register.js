@@ -98,10 +98,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // PROCEED TO PAYMENT
     proceedBtn.addEventListener('click', () => {
-        // Simple HTML5 validation check
-        if (!registrationForm.reportValidity()) {
-            return; // Browser will show validation UI for empty required fields
+        // Validate ONLY step 1 fields
+        const step1Inputs = step1.querySelectorAll('input[required], select[required]');
+        let isValid = true;
+        for (let input of step1Inputs) {
+            if (!input.checkValidity()) {
+                input.reportValidity();
+                isValid = false;
+                break;
+            }
         }
+        if (!isValid) return;
 
         const teamSize = parseInt(teamSizeSelect.value);
         if (isNaN(teamSize) || teamSize < 3 || teamSize > 4) {
