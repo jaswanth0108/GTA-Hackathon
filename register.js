@@ -167,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
             alert("Please upload your paid receipt screenshot!");
             return;
         }
-        
+
         const teamSize = parseInt(teamSizeSelect.value);
         const teamName = document.getElementById('team-name').value;
         const transactionId = document.getElementById('transaction-id').value;
@@ -178,48 +178,51 @@ document.addEventListener('DOMContentLoaded', () => {
                 name: document.getElementById(`member${i}-name`).value,
                 branch: document.getElementById(`member${i}-branch`).value
             };
-
             if (i === 1) {
                 member.phone = document.getElementById('head-phone').value;
                 member.email = document.getElementById('head-email').value;
                 member.college = document.getElementById('head-college').value;
             }
-
             members.push(member);
         }
 
-        const payload = {
-            teamName: teamName,
-            teamSize: teamSize,
-            members: members,
-            payment: {
-                transactionId: transactionId,
-                receiptBase64: base64Receipt,
-                amountPaid: teamSize * 200
-            }
-        };
-
         const submitBtn = step2.querySelector('.submit-btn');
         const originalText = submitBtn.innerText;
-        submitBtn.innerText = "SUBMITTING...";
+        submitBtn.innerText = "UPLOADING RECEIPT...";
         submitBtn.disabled = true;
 
-        // Build URLSearchParams — the most reliable format for Google Apps Script
-        // This sends as application/x-www-form-urlencoded (simple request, no CORS preflight)
-        const params = new URLSearchParams();
-        params.append('teamName', teamName);
-        params.append('teamSize', teamSize);
-        params.append('amountPaid', teamSize * 200);
-        params.append('transactionId', transactionId);
-        params.append('members', JSON.stringify(members));
-        if (base64Receipt) {
-            params.append('receiptBase64', base64Receipt);
-        }
+        // STEP 1: Upload image to ImgBB and get a permanent URL
+        const IMGBB_API_KEY = '90b2c32210e08d366909197ec23b82f4';
+        const imgbbForm = new FormData();
+        // ImgBB expects base64 WITHOUT the "data:image/jpeg;base64," prefix
+        imgbbForm.append('image', base64Receipt.split(',')[1]);
+        imgbbForm.append('name', teamName + '_' + transactionId + '_receipt');
 
-        fetch(SCRIPT_URL, {
+        fetch('https://api.imgbb.com/1/upload?key=' + IMGBB_API_KEY, {
             method: 'POST',
-            mode: 'no-cors',
-            body: params
+            body: imgbbForm
+        })
+        .then(res => res.json())
+        .then(imgData => {
+            if (!imgData.success) throw new Error("ImgBB upload failed");
+
+            const receiptUrl = imgData.data.url;
+            submitBtn.innerText = "SAVING DATA...";
+
+            // STEP 2: Send all data + image URL to Google Apps Script
+            const params = new URLSearchParams();
+            params.append('teamName', teamName);
+            params.append('teamSize', teamSize);
+            params.append('amountPaid', teamSize * 200);
+            params.append('transactionId', transactionId);
+            params.append('members', JSON.stringify(members));
+            params.append('receiptUrl', receiptUrl);
+
+            return fetch(SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                body: params
+            });
         })
         .then(() => {
             registrationForm.classList.add('hidden');
@@ -227,7 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(err => {
             console.error("Submission error:", err);
-            alert("Submission failed. Please check your internet connection and try again.");
+            alert("Submission failed: " + err.message + "\nPlease check your internet connection and try again.");
             submitBtn.innerText = originalText;
             submitBtn.disabled = false;
         });
