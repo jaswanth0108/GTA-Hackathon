@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // REPLACE THIS URL WITH YOUR DEPLOYED GOOGLE APPS SCRIPT WEB APP URL
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzC4zM2K-KkxM19R8ayV0NmQVV7VSXyKrQRkENAHZEovkUB7rhSPX30mMM6iU54uqJl/exec';
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyhD8qoy9UdN7UVSGzvDEwLTawjHq7DHjBVeEvSppLr43RlrZt2R-LvXCgRUT-DCmeQ/exec';
 
     teamSizeSelect.addEventListener('change', (e) => {
         const size = parseInt(e.target.value);
