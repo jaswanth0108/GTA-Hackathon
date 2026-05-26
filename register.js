@@ -163,6 +163,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // FINAL SUBMISSION
     registrationForm.addEventListener('submit', (e) => {
         e.preventDefault();
+
+        if (!base64Receipt) {
+            alert("Please upload your paid receipt screenshot!");
+            return;
+        }
         
         const teamSize = parseInt(teamSizeSelect.value);
         const teamName = document.getElementById('team-name').value;
