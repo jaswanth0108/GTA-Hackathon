@@ -214,13 +214,23 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        // Build FormData - works perfectly with no-cors (no preflight issues)
+        const formData = new FormData();
+        formData.append('teamName', teamName);
+        formData.append('teamSize', teamSize);
+        formData.append('amountPaid', teamSize * 200);
+        formData.append('transactionId', transactionId);
+        // Members as JSON string
+        formData.append('members', JSON.stringify(members));
+        // Append image as base64 string
+        if (base64Receipt) {
+            formData.append('receiptBase64', base64Receipt);
+        }
+
         fetch(SCRIPT_URL, {
             method: 'POST',
-            mode: 'no-cors', // Avoid CORS preflight issues with Google Apps Script
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(payload)
+            mode: 'no-cors',
+            body: formData
         })
         .then(() => {
             registrationForm.classList.add('hidden');
