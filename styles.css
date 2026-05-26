@@ -700,110 +700,109 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0;
+    gap: 8px;
     font-family: 'Righteous', sans-serif;
-    color: #fff;
+    color: #00ffff;
     text-decoration: none;
     text-transform: uppercase;
     cursor: pointer;
-    width: 140px;
-    height: 140px;
-    background: rgba(10, 5, 30, 0.7);
-    backdrop-filter: blur(12px);
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    border: 3px solid transparent;
+    width: 220px;
+    height: 90px;
+    border: none;
     outline: none;
     position: relative;
     margin-left: 8px;
-    overflow: hidden;
-    transform: rotate(45deg);
-    border-radius: 0;
-    border-image: linear-gradient(45deg, #ff00ff, #00ffff, #ff9900) 1;
-    box-shadow: 0 0 15px rgba(255, 0, 255, 0.3), inset 0 0 15px rgba(0, 255, 255, 0.2);
+    /* Neon Diamond / Rhombus shape */
+    background: linear-gradient(135deg, #ff0099, #00ffff, #ff9900);
+    clip-path: polygon(15px 0%, 100% 0%, calc(100% - 15px) 100%, 0% 100%);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* Outer glow for the clipped shape */
+    filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.4)) drop-shadow(0 0 5px rgba(255, 0, 153, 0.4));
 }
 
-.node-inner {
-    transform: rotate(-45deg);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    width: 100%;
-    height: 100%;
+/* Inner dark background */
+.nav-node::before {
+    content: '';
+    position: absolute;
+    inset: 3px; /* 3px gradient border */
+    background: rgba(10, 5, 25, 0.95);
+    /* Slightly smaller slant to stay parallel */
+    clip-path: polygon(14px 0%, 100% 0%, calc(100% - 14px) 100%, 0% 100%);
+    z-index: 0;
+    transition: background 0.3s ease;
 }
 
-/* Mechanical Corner Brackets */
-.node-brackets {
-    display: none;
+/* Ensure content stays on top of inner background */
+.nav-node > * {
+    position: relative;
+    z-index: 2;
 }
 
-.node-scanlines {
-    display: none;
+/* Hide old design elements */
+.node-brackets, .node-scanlines {
+    display: none !important;
 }
 
-/* Node specific styles (inverse rotation + custom borders/glows) */
+/* Hover effects */
+.nav-node:hover {
+    /* Scale combines with rotations later */
+    background: linear-gradient(135deg, #ff33b5, #33ccff, #ffb833);
+    filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.8)) drop-shadow(0 0 15px rgba(255, 0, 153, 0.8));
+}
+.nav-node:hover::before {
+    background: rgba(20, 10, 45, 0.95);
+}
+
+/* Counter Rotations (keeps text upright) */
 .connector-top-left .nav-node {
-    transform: translate(-10px, -10px) rotate(45deg);
+    transform: rotate(135deg);
 }
-.connector-top-left .node-brackets::before, .connector-top-left .node-brackets::after { border-color: #00ccff; }
 .connector-top-left:hover .nav-node {
-    transform: translate(-15px, -15px) rotate(45deg) scale(1.05);
-    box-shadow: 0 0 25px rgba(0, 204, 255, 0.6), inset 0 0 20px rgba(0, 204, 255, 0.4);
-    background: rgba(0, 204, 255, 0.1);
+    transform: rotate(135deg) scale(1.08);
 }
 
 .connector-top-right .nav-node {
-    transform: translate(10px, -10px) rotate(45deg);
+    transform: rotate(45deg);
 }
-.connector-top-right .node-brackets::before, .connector-top-right .node-brackets::after { border-color: #00ffff; }
 .connector-top-right:hover .nav-node {
-    transform: translate(15px, -15px) rotate(45deg) scale(1.05);
-    box-shadow: 0 0 25px rgba(0, 255, 255, 0.6), inset 0 0 20px rgba(0, 255, 255, 0.4);
-    background: rgba(0, 255, 255, 0.1);
+    transform: rotate(45deg) scale(1.08);
 }
 
 .connector-bottom-left .nav-node {
-    transform: translate(-10px, 10px) rotate(45deg);
+    transform: rotate(-135deg);
 }
-.connector-bottom-left .node-brackets::before, .connector-bottom-left .node-brackets::after { border-color: #ff00ff; }
 .connector-bottom-left:hover .nav-node {
-    transform: translate(-15px, 15px) rotate(45deg) scale(1.05);
-    box-shadow: 0 0 25px rgba(255, 0, 255, 0.6), inset 0 0 20px rgba(255, 0, 255, 0.4);
-    background: rgba(255, 0, 255, 0.1);
+    transform: rotate(-135deg) scale(1.08);
 }
 
 .connector-bottom-right .nav-node {
-    transform: translate(10px, 10px) rotate(45deg);
+    transform: rotate(-45deg);
 }
-.connector-bottom-right .node-brackets::before, .connector-bottom-right .node-brackets::after { border-color: #ffcc00; }
 .connector-bottom-right:hover .nav-node {
-    transform: translate(15px, 15px) rotate(45deg) scale(1.05);
-    box-shadow: 0 0 25px rgba(255, 204, 0, 0.6), inset 0 0 20px rgba(255, 204, 0, 0.4);
-    background: rgba(255, 204, 0, 0.1);
+    transform: rotate(-45deg) scale(1.08);
 }
 
+/* Icon & Text Styling to match Option C */
 .node-icon {
     width: 28px;
     height: 28px;
     margin-bottom: 2px;
     z-index: 2;
     position: relative;
+    stroke: #00ffff;
+    filter: drop-shadow(0 0 8px #00ffff);
 }
-.connector-top-left .node-icon { stroke: #00ccff; filter: drop-shadow(0 0 8px #00ccff); }
-.connector-top-right .node-icon { stroke: #00ccff; filter: drop-shadow(0 0 8px #00ccff); }
-.connector-bottom-left .node-icon { stroke: #ff00ff; filter: drop-shadow(0 0 8px #ff00ff); }
-.connector-bottom-right .node-icon { stroke: #ff9900; filter: drop-shadow(0 0 8px #ff9900); }
 
 .node-text {
-    font-size: 0.75rem;
+    font-size: 0.9rem;
+    color: #00ffff;
+    text-shadow: 0 0 10px #00ffff;
     letter-spacing: 2px;
-    color: #fff;
-    opacity: 0.9;
-    z-index: 2;
-    position: relative;
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    font-weight: 700;
 }
+/* (Deleted specific icon overrides to unify them) */
+
+
 
 /* ---- PILL BUTTONS ---- */
 .nav-btn-pill {
