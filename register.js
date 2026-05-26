@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isHead) {
             html += `
                 <div class="form-group">
-                    <input type="tel" id="head-phone" required pattern="[0-9]{10}" placeholder=" ">
+                    <input type="tel" id="head-phone" required pattern="[0-9]{10}" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')" placeholder=" ">
                     <label for="head-phone">Phone Number (10 digits)</label>
                 </div>
                 <div class="form-group">
@@ -141,6 +141,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const teamSize = parseInt(teamSizeSelect.value);
         if (isNaN(teamSize) || teamSize < 3 || teamSize > 4) {
             alert("Team size must be between 3 and 4 members.");
+            return;
+        }
+
+        // Branch check: ensure not all members are from the exact same branch
+        const branches = new Set();
+        for (let i = 1; i <= teamSize; i++) {
+            const branchSelect = document.getElementById(`member${i}-branch`);
+            if (branchSelect && branchSelect.value) {
+                branches.add(branchSelect.value);
+            }
+        }
+        if (branches.size === 1) {
+            alert("All team members cannot be from the same branch. Please ensure at least one member is from a different branch.");
             return;
         }
 
