@@ -74,15 +74,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const backBtn = document.getElementById('back-btn');
     const paymentAmountSpan = document.getElementById('payment-amount');
     const receiptUpload = document.getElementById('receipt-upload');
-    const fileNameSpan = document.getElementById('file-name');
-    
+    const fileNameDisplay = document.getElementById('file-name');
+    const uploadTriggerBtn = document.getElementById('upload-trigger-btn');
+
+    // Wire the button to open the file picker
+    uploadTriggerBtn.addEventListener('click', () => {
+        receiptUpload.click();
+    });
+
     let base64Receipt = '';
 
     // Update file name and compress image on selection
     receiptUpload.addEventListener('change', function() {
         if (this.files && this.files[0]) {
             const file = this.files[0];
-            fileNameSpan.textContent = file.name;
+            fileNameDisplay.textContent = '✔ ' + file.name;
+            fileNameDisplay.style.color = '#00ffcc';
             
             // Read file and compress it to avoid Google Apps Script size limits
             const reader = new FileReader();
@@ -95,32 +102,24 @@ document.addEventListener('DOMContentLoaded', () => {
                     let width = img.width;
                     let height = img.height;
 
-                    // Calculate new dimensions
                     if (width > height) {
-                        if (width > MAX_WIDTH) {
-                            height *= MAX_WIDTH / width;
-                            width = MAX_WIDTH;
-                        }
+                        if (width > MAX_WIDTH) { height *= MAX_WIDTH / width; width = MAX_WIDTH; }
                     } else {
-                        if (height > MAX_HEIGHT) {
-                            width *= MAX_HEIGHT / height;
-                            height = MAX_HEIGHT;
-                        }
+                        if (height > MAX_HEIGHT) { width *= MAX_HEIGHT / height; height = MAX_HEIGHT; }
                     }
 
                     canvas.width = width;
                     canvas.height = height;
                     const ctx = canvas.getContext('2d');
                     ctx.drawImage(img, 0, 0, width, height);
-
-                    // Compress to JPEG with 0.7 quality (drastically reduces base64 string size)
                     base64Receipt = canvas.toDataURL('image/jpeg', 0.7);
                 };
                 img.src = e.target.result;
             };
             reader.readAsDataURL(file);
         } else {
-            fileNameSpan.textContent = 'Upload Paid Receipt Screenshot';
+            fileNameDisplay.textContent = 'No file chosen';
+            fileNameDisplay.style.color = 'rgba(255,255,255,0.6)';
             base64Receipt = '';
         }
     });

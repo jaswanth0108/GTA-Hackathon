@@ -274,23 +274,26 @@ body {
     text-align: center;
     margin-top: 10px;
 }
-.file-upload-group input[type="file"] {
-    display: none;
-}
-.file-upload-group .file-label {
-    display: inline-block;
-    padding: 12px 20px;
-    background: rgba(0, 255, 255, 0.1);
-    border: 2px dashed var(--vc-cyan);
-    color: var(--vc-cyan);
-    cursor: pointer;
-    border-radius: 4px;
-    transition: all 0.3s ease;
+
+.upload-btn {
     width: 100%;
+    background: rgba(0, 255, 255, 0.1) !important;
+    border: 2px solid var(--vc-cyan) !important;
+    color: var(--vc-cyan) !important;
+    font-size: 0.9rem !important;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
 }
-.file-upload-group .file-label:hover {
-    background: rgba(0, 255, 255, 0.2);
-    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+.upload-btn:hover {
+    background: rgba(0, 255, 255, 0.25) !important;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.6) !important;
+}
+
+.file-name-display {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.8rem;
+    margin: 0;
+    font-style: italic;
 }
 
 .caution-message {
